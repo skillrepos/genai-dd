@@ -6,13 +6,13 @@ These instructions will guide you through configuring a GitHub Codespaces enviro
 
 **1. Click on the button below to start a new codespace from this repository.
 
-Click here ➡️  [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/skillrepos/gen-ai-dd?quickstart=1)
+Click here ➡️  [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/skillrepos/genai-dd?quickstart=1)
 
 **2. Then click on the option to create a new codespace.**
 
 ![Creating new codespace from button](./images/dga01.png?raw=true "Creating new codespace from button")
 
-This will run for up to 10 minutes while it gets everything ready.
+This will run for several minutes while it gets everything ready.
 
 NOTE: At the end, after the codespace is actually started, it will still be running some post-startup scripts that will take a few more minutes to complete as shown below:
 
@@ -38,13 +38,6 @@ To do this, when logged in to GitHub, go to https://github.com/settings/codespac
 
 1. Go to https://github.com/<your github userid>/codespaces
 2. Find the codespace in the list, right-click, and select *Open in browser*
-3. After the codespace opens up, run the script *./scripts/startLMStudio.sh* in the terminal. (You might need to run this more than once if restarting a codespace depending on timing.)
-```
-./scripts/startLMStudio.sh
-```
-
-![Running startlmstudio.sh](./images/dga06.png?raw=true "Running startlmstudio.sh")
-
 
 <br/><br/>
 
