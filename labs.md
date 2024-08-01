@@ -401,11 +401,67 @@ streamlit run chatapp.py
 ![interacting with chatbot](./images/dga51.png?raw=true "interacting with chatbot")
 ![interacting with chatbot](./images/dga52.png?raw=true "interacting with chatbot")
 
+<p align="center">
+**[END OF LAB]**
+</p>
+
+**Lab 7 - Working with Vector Databases**
+
+**Purpose: In this lab, we’ll learn about how to use vector databases for storing supporting data and doing similarity searches.**
+
+1. In our repository, we have a simple program built around a popular vector database called Chroma. The file name is genai_vectordb.py. Open the file either by clicking on [**genai_vectordb.py**](./genai_vectordb.py) or by entering the command below in the codespace's terminal.
+
+```
+code genai_vectordb.py
+```
+
+2. For purposes of not having to load a lot of data and documents, we've *seeded* some data strings in the file that we're loosely referring to as documents. These can be seen in the *docdata* section of the file.
+
+3. Likewise, we've added some metadata in the way of categories for the data items. These can be seen in the categories section.
+
+4. Go ahead and run this program using the command shown below. This will take the document strings, create embeddings and vectors for them in the Chroma database section and then wait for us to enter a query.
+```
+python genai_vectordb.py
+```
+5. You can enter a query here about any topic and the vector database functionality will try to find the most similar matching data that it has. Since we've only given it a set of 10 strings to work from, the results may not be relevant or very good, but represent the best similarity match the system could find based on the query. Go ahead and enter a query. Some sample ones are shown below, but you can choose others if you want. Just remember it will only be able to choose from the data we gave it.
+```
+Tell me about food.
+Who is the most famous person?
+How can I learn better?
+```
+6. After you've entered and run your query, you can add another one or just type *exit* to stop.
+
+
+7. Next, try multiple queries (separated by commas).
+
+8. Update the number of results to return by editing the file and running it again.
+
+9. When done querying the data, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided.
 
 <p align="center">
 **[END OF LAB]**
 </p>
 
+**Lab 8 - Working with RAG**
+
+**Purpose: In this lab, we’ll build on the use of vector databases to parse a PDF and allow us to include it in context for LLM queries.**
+
+1. In our repository, we have a simple program built for doing basic RAG processing. The file name is genai_rag.py. Open the file either by clicking on [**genai_rag.py**](./genai_rag.py) or by entering the command below in the codespace's terminal.
+
+```
+code genai_rag.py
+```
+
+2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *test.pdf* in the directory. Go ahead and run the program and pass the pdf as the argument to it.
+
+```
+python genai_rag.py test.pdf
+```
+
+3. This PDF is actually a ...  .  It has more recent data than what the LLM was trained on. The program will be waiting for a query. Let's ask it a query for some information it could only get from a more recent source - the PDF.
+```
+<insert question here>
+```
 <p align="center">
 **THANKS!**
 </p>
