@@ -67,11 +67,11 @@ python genai_nn.py
 ```
 code genai_tokenizer.py
 ```
-2. This program can be run and passed a model to use for tokenization. To start, we'll be using a model named *bert-base-uncased*. Let's look at this model on huggingface.co.  Go to https://huggingface.co/models and in the Models search area, type in *bert-base-uncased*. Select the entry for *google-bert/bert-base-uncased*.
+2. This program can be run and passed a model to use for tokenization. To start, we'll be using a model named *bert-base-uncased*. Let's look at this model on huggingface.co.  Go to https://huggingface.co/models and in the *Models* search area, type in *bert-base-uncased*. Select the entry for *google-bert/bert-base-uncased*.
 
 ![Finding bert model on huggingface](./images/gaidd12.png?raw=true "Finding bert model on huggingface")
 
-3. Once you click on the selection, you'll be on the *model card* tab for the model. Take a look at the model card for the model and then click on the Files and Community tabs to look at those pages.
+3. Once you click on the selection, you'll be on the *model card* tab for the model. Take a look at the model card for the model and then click on the *Files and Versions* and *Community* tabs to look at those pages.
 
 ![huggingface tabs](./images/gaidd13.png?raw=true "huggingface tabs")
 
@@ -146,75 +146,6 @@ python genai_vectors.py bert-base-cased 768
 ![finding terms in file](./images/gaidd24.png?raw=true "finding terms in files")
 
 10. If you want, you can try running the *genai_vectors.py* program with a different model to see results from other models (such as we used in lab 2) and words that are very close like *embeddings*, *tokenization*, *subwords*.
-
-
-
-
-13. Now, at the top center of the *AI Chat* screen, click on the down arrow next to the *Select a model to load* text and select the *llama* model we downloaded.
-   
-![Switching to chat](./images/dga23a.png?raw=true "Switching to chat")
-  
-3. You should see a progress bar while the model is loading and then the model should show up as loaded. (If a dialog box comes up about the System Prompt, you can just choose to accept the new one.)
-![Switching to chat](./images/dga24.png?raw=true "Switching to chat")
-![Switching to chat](./images/dga25a.png?raw=true "Switching to chat")
-
-4. Over in the right-hand side window, you can explore the different options. Change the *System Prompt* field to be:
-```
-You are an excellent summarizer. Always answer with 3 key points.
-```
-![Switching to chat](./images/dga26a.png?raw=true "Switching to chat")
-
-5. Now, let's give our loaded model a query. In the *USER* text entry area, enter your query. (An example one is shown, but you can choose your own.)
-   
-![User query](./images/dga27a.png?raw=true "User query")
-
-6. Example output from the sample query is shown below. Note that if you don't like the answer, you can click the *Regenerate* button to get another answer.
-![Switching to chat](./images/dga28b.png?raw=true "Switching to chat")
-
-7. Now, let's have LM Studio run a local server for this model. In the lefthand bar, select the next to bottom icon for the *Local Server* screen.
-![Switching to chat](./images/dga29.png?raw=true "Switching to chat")
-
-8. On the *Local Server* screen, click on the green *Start Server* button on the left side. Afterwards, you should see activity showing the server is running.
-![Starting server](./images/dga30a.png?raw=true "Starting server")
-![Server running](./images/dga43.png?raw=true "Server running")
-
-9. Now, switch back to your codespace and go to a terminal. (You can add a 2nd terminal if you want via the "+" icon over in the far right of the same line as TERMINAL. Or you can right-click and select New Terminal* or *Split Terminal*.) In the terminal's command line, let's check to see which model(s) are loaded in LM Studio. You can use the following command.
-```
-curl http://localhost:1234/v1/models
-```
-10. Finally, let's try a simple query with curl. Try the query below.
-```
-curl http://localhost:1234/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{ 
-    "messages": [ 
-      { "role": "system", "content": "Always answer in rhymes." },
-      { "role": "user", "content": "Introduce yourself." }
-    ], 
-    "temperature": 0.7, 
-    "max_tokens": -1,
-    "stream": true
-}'
-```
-11. To see the output in a more readable format, set the *stream* value to *false* and run the command again.
-```
-curl http://localhost:1234/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{ 
-    "messages": [ 
-      { "role": "system", "content": "Always answer in rhymes." },
-      { "role": "user", "content": "Introduce yourself." }
-    ], 
-    "temperature": 0.7, 
-    "max_tokens": -1,
-    "stream": false
-}'
-```    
-
-<p align="center">
-**[END OF LAB]**
-</p>
-</br></br>
 
 
 **Lab 4 - Working with models in Hugging Face**
