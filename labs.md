@@ -256,7 +256,9 @@ curl http://localhost:11434/api/generate -d '{
 }'
 ```
 
-9. This will take a minute or so to run. You should a single response object returned. You can try out some other prompts/queries if you want.
+9. This will take a minute or so to run. You should see a single response object returned. You can try out some other prompts/queries if you want.
+
+![query response](./images/gaidd25.png?raw=true "Query response")
 
 <p align="center">
 **[END OF LAB]**
