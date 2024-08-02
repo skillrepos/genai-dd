@@ -7,11 +7,9 @@
 
 **NOTE: To copy and paste in the codespace, you may need to use keyboard commands - CTRL-C and CTRL-V. Chrome may work best for this.**
 
-**NOTE: You may see periodic "Reconnecting" messages pop up. This is normal and they will go away shortly.**
-
 **Lab 1 - Working with Neural Networks**
 
-**Purpose: In this lab, we’ll learn more about neural networks by seeing how one is coded and .**
+**Purpose: In this lab, we’ll learn more about neural networks by seeing how one is coded and trained.**
 
 1. In our repository, we have a simple neural net coded in Python. The file name is genai_nn.py. Open the file either by clicking on [**genai_nn.py**](./genai_nn.py) or by entering the command below in the codespace's terminal.
 
@@ -21,7 +19,7 @@ code genai_nn.py
 
 2. Scroll down to around line 55. Notice the *training_inputs* data and the *training_outputs* data. Each row of the *training_outputs* is what we want the model to predict for the corresponding input row. As coded, the output for the input is just the first element of the array.  For inputs [0,0,1] we are trying to train the model to predict [0]. For the inputs [1,0,1], we are trying to train the model to predict [1], etc.
 
-3. When we run the program, it will train the neural net to try and predict the outputs corresponding to the inputs. You will see the random training weights to start and then the adjusted weights to make the model predict the output. You will then be prompted to put in your own training data. We'll look at that in the next step. For now, go ahead and run the program (command below) but don't put in any inputs yet.
+3. When we run the program, it will train the neural net to try and predict the outputs corresponding to the inputs. You will see the random training weights to start and then the adjusted weights to make the model predict the output. You will then be prompted to put in your own training data. We'll look at that in the next step. For now, go ahead and run the program (command below) but don't put in any inputs yet. Just notice how the weights have been adjusted after the training process.
 
 ```
 python genai_nn.py
