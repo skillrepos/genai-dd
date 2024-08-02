@@ -21,4 +21,8 @@ english_texts = [
 text_length = len(english_texts)
 for text_index in range(text_length):
   prediction = my_classifier(english_texts[text_index], candidate_labels, multi_label = True)
-  print(prediction)
+  print('text',text_index,' : ',prediction['sequence'])
+  labels_length = len(candidate_labels)
+  for label_item in range(labels_length):
+     print('{:>10} : {:>10}'.format(prediction['labels'][label_item],prediction['scores'][label_item]))
+  print("")
