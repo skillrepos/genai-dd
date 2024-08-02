@@ -54,15 +54,15 @@ if __name__ == "__main__":
 
     # training data input has 4 examples (each row is one set)
     training_inputs = np.array([[0,0,1],
-                    [1,1,1],
-                    [1,0,1],
-                    [0,1,1]])
+                                [1,1,1],
+                                [1,0,1],
+                                [0,1,1]])
     
     # training data output has 4 values - each item corresponds to input row
     training_outputs = np.array([[0],
-                                [1],
-                                [0],
-                                [1]])
+                                 [1],
+                                 [1],
+                                 [0]])
     
     # initialize the neural net
     neural_net = NeuralNet()
