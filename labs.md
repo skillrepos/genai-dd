@@ -96,6 +96,11 @@ python genai_tokenizer.py gpt2
 python genai_tokenizer.py xlnet-large-cased
 ```
 
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
+
 **Lab 3 - Understanding embeddings, vectors and similarity measures**
 
 **Purpose: In this lab, we'll see how tokens get mapped to vectors and how vectors can be compared.**
@@ -147,6 +152,10 @@ python genai_vectors.py bert-base-cased 768
 
 10. If you want, you can try running the *genai_vectors.py* program with a different model to see results from other models (such as we used in lab 2) and words that are very close like *embeddings*, *tokenization*, *subwords*.
 
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
 
 **Lab 4 - Working with models in Hugging Face**
 
@@ -370,6 +379,7 @@ How can I learn better?
 <p align="center">
 **[END OF LAB]**
 </p>
+</br></br>
 
 **Lab 8 - Working with RAG**
 
@@ -391,6 +401,11 @@ python genai_rag.py test.pdf
 ```
 <insert question here>
 ```
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
+
 <p align="center">
 **THANKS!**
 </p>
