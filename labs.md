@@ -260,87 +260,7 @@ curl http://localhost:11434/api/generate -d '{
 </p>
 </br></br>
 
-**Lab 6 - Building a chatbot with Streamlit**
-
-**Purpose: In this lab, we'll see how to use the Streamlit application to create a simple chatbot with Ollama.**
-
-1. Let's get another model to work with - a small one. Pull the *Phi3 mini* model with Ollama.
-```
-ollama pull phi3:mini
-```
-
-2. Create a new file for the chatbot app.
-```
-code chatapp.py
-```
-
-3. In the chatapp.py file, add the initial imports we need for streamlit and ollama
-```
-import streamlit as st
-# import ollama wrapper
-import ollama
-```
-
-4. Now, we set the title and initialize the session messages. (You can change the title and "content" sections if you want.)
-```
-st.title("DIY Gen AI Chatbot")
-# check messages variable in streamlit's session state
-if "messages" not in st.session_state:
-      # if no value set, (we're just starting out) then initialize with friendly message
-      # role is either "user" or "assistant"
-      st.session_state["messages"] = [ {"role":  "assistant",  "content":  "What can I help you with?"}]
-```
-5. Add code to write the msg history
-```
-# Write msg history
-for msg in st.session_state.messages:
-       st.chat_message(msg["role"]).write(msg["content"])
-```
-
-6. Now, add the generator function for responses
-```
-# Generator for streaming tokens
-def generate_response():
-        # call chat function in ollama, get response from the loaded model
-        response = ollama.chat(model='phi3:mini', stream=True, messages=st.session_state.messages)
-        for partial_resp in response:
-               token = partial_resp["message"]["content"]
-               # maintain history/context
-               st.session_state["full_message"] += token
-               yield token
-```
-
-7. Finally, add the code to save the messages and call the generator function
-
-```
-if prompt := st.chat_input():
-      # save the message for the user role
-      st.session_state.messages.append({"role": "user", "content": prompt})
-      st.chat_message("user").write(prompt)
-      st.session_state["full_message"] = ""
-      # call the generate_response function above
-      st.chat_message("assistant").write_stream(generate_response)
-      # save the message for the assistant role
-      st.session_state.messages.append({"role": "assistant", "content": st.session_state["full_message"]})
-```
-
-8. Now, save your file and run it with the following command. (You can just ignore the email field.)
-```
-streamlit run chatapp.py
-```
-
-9. After a moment this should open up a browser session with your chatbot running. You can ask it a question or prompt it as you want.
-![interacting with chatbot](./images/dga50.png?raw=true "interacting with chatbot")
-
-10. One other thing you can try if you want is having it generate code or translate code. Notice that it has a "memory" between questions for context.
-![interacting with chatbot](./images/dga51.png?raw=true "interacting with chatbot")
-![interacting with chatbot](./images/dga52.png?raw=true "interacting with chatbot")
-
-<p align="center">
-**[END OF LAB]**
-</p>
-
-**Lab 7 - Working with Vector Databases**
+**Lab 6 - Working with Vector Databases**
 
 **Purpose: In this lab, we’ll learn about how to use vector databases for storing supporting data and doing similarity searches.**
 
@@ -365,7 +285,6 @@ Who is the most famous person?
 How can I learn better?
 ```
 6. After you've entered and run your query, you can add another one or just type *exit* to stop.
-
 
 7. Next, try multiple queries (separated by commas).
 
