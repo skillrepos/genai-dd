@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 1.1 - 07/28/24
+## Revision 1.2 - 08/04/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -157,53 +157,48 @@ python genai_vectors.py bert-base-cased 768
 </p>
 </br></br>
 
-**Lab 4 - Working with models in Hugging Face**
+**Lab 4 - Working with transformer models**
 
-**Purpose: In this lab, we’ll see how to get more information about, and work directly with, models in Hugging Face.**
+**Purpose: In this lab, we’ll see how to interact with various models for different standard tasks**
 
-1. In a browser, go to *https://huggingface.co/models*.
-
-2. Let's search for another simple model to try out. In the search bar, enter the text *DialoGPT*. Look for and select the *microsoft/DialoGPT-medium* model.
-  ![model search](./images/dga44.png?raw=true "model search")
-
-3. Let's see how we can quickly get up and running with this model. On the *Model Card* page for the *microsoft/DialoGPT-medium* model, if you scroll down, you'll see a *How to use* section with some code in it. Highlight that code and copy it so we can paste it in a file in our workspace.
-
-![code to use model](./images/dga45.png?raw=true "code to use model")
-   
-4. Switch back to your codespace. Create a new file named dgpt-med.py (or whatever you want to call it). Paste the code you copied from the model card page into the file. You can create the new file from the terminal using:
+1. In our repository, we have several different Python programs that utilize transformer models for standard types of LLM tasks. One of them is a simple a simple translation example. The file name is genai_translation.py. Open the file either by clicking on [**genai_translation.py**](./genai_translation.py) or by entering the command below in the codespace's terminal.
 
 ```
-code dgpt-med.py
+code genai_translation.py
 ```
-![adding code](./images/dga46.png?raw=true "adding code")
+2. Take a look at the file contents.  Notice that we are pulling in a specific model ending with 'en-fr'. This is a clue that this model is trained for English to French translation. Let's find out more about it. In a browser, go to *https://huggingface.co/models* and search for the model name 'Helsinki-NLP/opus-mt-en-fr' (or you can just go to huggingface.co/Helsinki-NLP/opus-mt-en-fr).
+  ![model search](./images/gaidd26.png?raw=true "model search")
 
-5. Don't forget to save your file. Now you can run your file by invoking it with python. You'll see it start to download the files associated with the model. This will take a bit of time to run.
+3. You can look around on the model card for more info about the model. Notice that it has links to an *OPUS readme* and also links to download its original weights, translation test sets, etc.
+
+4. When done looking around, go back to the repository and look at the rest of the *genai_translation.py* file. What we are doing is loading the model, the tokenizer, and then taking a set of random texts and running them through the tokenizer and model to do the translation. Go ahead and execute the code in the terminal via the command below.
 ```
-python dgpt-med.py
+python genai_translation.py
 ```
-![running the model](./images/dga47.png?raw=true "running the model")
-
-6. After the model loads, you'll see a *>> User:* prompt. You can enter a prompt or question here, and after some time, the model will provide a response.  **NOTE** This model is small and old and does not provide good responses usually or even ones that make sense. We are using it as a simple, quick demo only.
+5. There's also an example program for doing classification. The file name is genai_classification.py. Open the file either by clicking on [**genai_classification.py**](./genai_classification.py) or by entering the command below in the codespace's terminal.
 
 ```
->> User: <prompt here>
+code genai_classification.py
 ```
-![running the model](./images/dga48.png?raw=true "running the model")
+6. Take a look at the model for this one *joeddav/xlm-roberta-large-xnli* on huggingface.co and read about it. When done, come back to the repo.
 
-7. Let's now switch to a different model. Go back to the Hugging Face search and look for *phi3-vision*. Find and select the entry for *microsoft/Phi-3-vision-128k-instruct*.
-![finding the phi3-vision model](./images/dga49.png?raw=true "finding the phi3-vision model")
-
-8. Switch to the *Files and versions* page to see the sizes of the files in the Git repository. Note the larger sizes of the model files themselves.
-![examining the model files](./images/dga53.png?raw=true "examining the model files")
-
-9. Now, let's see how we can try this model out with no setup on our part. Go back to the *Model card* tab, and scroll down to the *Resources and Technical Documentation* section. Under that, select the entry for *Phi-3 on Azure AI Studio*.
-![Invoking model on Azure AI Studio](./images/dga54.png?raw=true "Invoking the model on Azure AI Studio")
-
-10. This will start up a separate browser instance of Azure AI Studio with the model loaded so you can query it. In the prompt area, enter in a prompt to have the AI describe a picture. You can upload one, enter the URL of one on the web, or use the example one suggested below. After you submit your prompt, the model should return a description of the photo. (If you get a response like *"Sorry I can't assist with that."*, refresh the page and try again.)
+7. This uses a HuggingFace pipeline to do the main work. Notice it also includes a list of categories as *candidate_labels* that it will use to try and classify the data. Go ahead and run it to see it in action.
 ```
-Describe the image at https://media.istockphoto.com/id/1364253107/photo/dog-and-cat-as-best-friends-looking-out-the-window-together.jpg?s=2048x2048&w=is&k=20&c=Do171m5e2DbPIlWDs1JfHn-g8Et_Hxb2AskHg4cRYY4=
+python genai_classification.py
 ```
-![Describing an image](./images/dga55.png?raw=true "Describing an image")
+
+8. Finally, we have a program to do sentiment analysis. The file name is genai_sentiment.py. Open the file either by clicking on [**genai_sentiment.py**](./genai_sentiment.py) or by entering the command below in the codespace's terminal.
+
+```
+code genai_sentiment.py
+```
+9. Again, you can look at the model used by this one "distilbert-base-uncased-finetuned-sst-2-english" in Hugging Face.
+
+10. When ready, go ahead and run this one in the similar way and observe which ones it classified as positive and which as negative and the relative scores.
+```
+python genai_sentiment.py
+```
+11. If you're done early, feel free to change the texts, the candidate_labels, etc. and rerun the models to see the results.
 
 <p align="center">
 **[END OF LAB]**
@@ -212,7 +207,7 @@ Describe the image at https://media.istockphoto.com/id/1364253107/photo/dog-and-
 
 **Lab 5 - Using Ollama to run models locally**
 
-**Purpose: In this lab, we’ll start getting familiar with Ollama, another way to run models locally.**
+**Purpose: In this lab, we’ll start getting familiar with Ollama, a way to run models locally.**
 
 1. First, to get *ollama* downloaded, execute the command below. Then you can run the actual application to see usage.
 ```
