@@ -8,4 +8,4 @@ python3 -m venv ./$PYTHON_ENV  \
 
 source ./$PYTHON_ENV/bin/activate
 
-pip3 install -r /workspaces/diy-gen-ai/requirements/requirements.txt
+pip3 install -r /workspaces/genai-dd/requirements/requirements.txt
