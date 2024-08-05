@@ -111,30 +111,30 @@ python tokenizer.py xlnet-large-cased
 
 **Purpose: In this lab, we'll see how tokens get mapped to vectors and how vectors can be compared.**
 
-1. In the repository, we have a Python program that uses a Tokenizer and Model to create embeddings for three terms that you input. It then computes and displays the cosine similarity between each combination. Open the file to look at it by clicking on [**genai_vectors.py**](./genai_vectors.py) or by using the command below in the terminal.
+1. In the repository, we have a Python program that uses a Tokenizer and Model to create embeddings for three terms that you input. It then computes and displays the cosine similarity between each combination. Open the file to look at it by clicking on [**genai/vectors.py**](./genai/vectors.py) or by using the command below in the terminal.
 ```
-code genai_vectors.py
+code vectors.py
 ```
 2. Let's run the program. As we did for the tokenizer example, we'll pass in a model to use. We'll also pass in a second argument which is the number of dimensions from the vector for each term to show. Run the program with the command below. You can wait to enter terms until the next step.
 ```
-python genai_vectors.py bert-base-cased 5
+python vectors.py bert-base-cased 5
 ```
-![vectors program run](./images/gaidd16.png?raw=true "vectors program run")
+![vectors program run](./images/gaidd38.png?raw=true "vectors program run")
 
 3. The command we just ran loads up the bert-base-cased model and tells it to show the first 5 dimensions of each vector for the terms we enter. The program will be prompting you for three terms. Enter each one in turn. You can try two closely related words and one that is not closely related. For example
    - king
    - queen
    - duck
 
-![vectors program inputs](./images/gaidd17.png?raw=true "vectors program inputs")
+![vectors program inputs](./images/gaidd39.png?raw=true "vectors program inputs")
 
 4. Once you enter the terms, you'll see the first 5 dimensions for each term. And then you'll see the cosine similarity displayed between each possible pair. This is how similar each pair of words is. The two that are most similar should have a higher cosine similarity "score".
 
-![vectors program outputs](./images/gaidd18.png?raw=true "vectors program outputs")
+![vectors program outputs](./images/gaidd40.png?raw=true "vectors program outputs")
 
 5. Each vector in the bert-based models have 768 dimensions. Let's run the program again and tell it to display 768 dimensions for each of the three terms.  Also, you can try another set of terms that are more closely related, like *multiplication*, *division*, *addition*.
 ```
-python genai_vectors.py bert-base-cased 768
+python vectors.py bert-base-cased 768
 ```
 6. You should see that the cosine similarities for all pair combinations are not as far apart this time.
 ![vectors program second outputs](./images/gaidd19.png?raw=true "vectors program second outputs")
