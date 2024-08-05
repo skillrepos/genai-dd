@@ -12,8 +12,11 @@ Click here ➡️  [![Open in GitHub Codespaces](https://github.com/codespaces/b
 
 ![Creating new codespace from button](./images/gaidd1.png?raw=true "Creating new codespace from button")
 
-This will run for several minutes while it gets everything ready.
+This will run for a long time (10 or more minutes) while it gets everything ready.
 
+After the initial startup, it will run a script to setup the python environment and install needed python pieces. This will take several more minutes to run. It will look like this while this is running.
+
+![Running setup script](./images/gaidd28.png?raw=true "Running setup script")
 
 The codespace is ready to use when you see a prompt like the one shown below in its terminal.
 
