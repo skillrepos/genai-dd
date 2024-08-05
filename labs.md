@@ -11,47 +11,52 @@
 
 **Purpose: In this lab, we’ll learn more about neural networks by seeing how one is coded and trained.**
 
-1. In our repository, we have a simple neural net coded in Python. The file name is genai_nn.py. Open the file either by clicking on [**genai_nn.py**](./genai_nn.py) or by entering the command below in the codespace's terminal.
+1. In our repository, we have a set of Python programs to help us illustrate and work with concepts in the labs. These are mostly in the *genai* subdirectory. Go to the *TERMINAL* tab in the bottom part of your codespace and change into that directory.
+```
+cd genai
+```
+
+2. For this lab, we have a simple neural net coded in Python. The file name is nn.py. Open the file either by clicking on [**genai/nn.py**](./genai/nn.py) or by entering the command below in the codespace's terminal.
 
 ```
-code genai_nn.py
+code nn.py
 ```
 
-2. Scroll down to around line 55. Notice the *training_inputs* data and the *training_outputs* data. Each row of the *training_outputs* is what we want the model to predict for the corresponding input row. As coded, the output for the input is just the first element of the array.  For inputs [0,0,1] we are trying to train the model to predict [0]. For the inputs [1,0,1], we are trying to train the model to predict [1], etc.
+3. Scroll down to around line 55. Notice the *training_inputs* data and the *training_outputs* data. Each row of the *training_outputs* is what we want the model to predict for the corresponding input row. As coded, the output for the sample inputs ends up being the same as the first element of the array.  For inputs [0,0,1] we are trying to train the model to predict [0]. For the inputs [1,0,1], we are trying to train the model to predict [1], etc.
 
-3. When we run the program, it will train the neural net to try and predict the outputs corresponding to the inputs. You will see the random training weights to start and then the adjusted weights to make the model predict the output. You will then be prompted to put in your own training data. We'll look at that in the next step. For now, go ahead and run the program (command below) but don't put in any inputs yet. Just notice how the weights have been adjusted after the training process.
+4. When we run the program, it will train the neural net to try and predict the outputs corresponding to the inputs. You will see the random training weights to start and then the adjusted weights to make the model predict the output. You will then be prompted to put in your own training data. We'll look at that in the next step. For now, go ahead and run the program (command below) but don't put in any inputs yet. Just notice how the weights have been adjusted after the training process.
 
 ```
-python genai_nn.py
+python nn.py
 ```
-![Starting run of simple nn](./images/gaidd5.png?raw=true "Starting run of simple nn") 
+![Starting run of simple nn](./images/gaidd30.png?raw=true "Starting run of simple nn") 
 
-4. What you should see is that the weights after training are now set in a way that makes it more likely that the result will match the expected output value. To prove this out, you can enter your own input set - just use 1's and 0's for each input. 
+5. What you should see is that the weights after training are now set in a way that makes it more likely that the result will match the expected output value. To prove this out, you can enter your own input set - just use 1's and 0's for each input. 
 
-![Inputs to simple nn](./images/gaidd6.png?raw=true "Inputs to simple nn") 
+![Inputs to simple nn](./images/gaidd31.png?raw=true "Inputs to simple nn") 
 
-5. After you put in your inputs, the neural net will process your input and because of the training, it should predict a result that is close to the first input value you entered (the one for *Input one*).
+6. After you put in your inputs, the neural net will process your input and because of the training, it should predict a result that is close to the first input value you entered (the one for *Input one*).
 
-![Prediction close to first input](./images/gaidd7.png?raw=true "Prediction close to first input") 
+![Prediction close to first input](./images/gaidd32.png?raw=true "Prediction close to first input") 
 
-6. Now, let's see what happens if we change the expected outputs to be different. In the editor for the genai_nn.py file, find the line for the *training_outputs*. Modify the values in the array to be ([[0],[1],[0],[1]]). These are the values of the second element in each of the training data entries. After you're done, save your changes as shown below.
+7. Now, let's see what happens if we change the expected outputs to be different. In the editor for the genai_nn.py file, find the line for the *training_outputs*. Modify the values in the array to be ([[0],[1],[0],[1]]). These are the values of the second element in each of the training data entries. After you're done, save your changes as shown below.
 
-![Modifying expected outputs](./images/gaidd8.png?raw=true "Modifying expected outputs")
+![Modifying expected outputs](./images/gaidd33.png?raw=true "Modifying expected outputs")
 ![Saving changes](./images/gaidd9.png?raw=true "Saving changes")
 
-7. Now, run the neural net again. This time when the weights after training are shown, you should see a bias for a higher weight for the second item.
+8. Now, run the neural net again. This time when the weights after training are shown, you should see a bias for a higher weight for the second item.
 ```
-python genai_nn.py
+python nn.py
 ```
-![Second run of simple nn](./images/gaidd10.png?raw=true "Second run of simple nn") 
+![Second run of simple nn](./images/gaidd34.png?raw=true "Second run of simple nn") 
 
-8. At the input prompts, just input any sequence of 0's and 1's as before.
+9. At the input prompts, just input any sequence of 0's and 1's as before.
 
-9. When the trained model then processes your inputs, you should see that it predicts a value that is close to 0 or 1 depending on what your second input was.
+10. When the trained model then processes your inputs, you should see that it predicts a value that is close to 0 or 1 depending on what your second input was.
 
-![Second output of simple nn](./images/gaidd11.png?raw=true "Second output of simple nn")
+![Second output of simple nn](./images/gaidd35.png?raw=true "Second output of simple nn")
 
-10. If you get done early, feel free to try other combinations of training inputs and training outputs.
+11. If you get done early, feel free to try other combinations of training inputs and training outputs.
     
 <p align="center">
 **[END OF LAB]**
