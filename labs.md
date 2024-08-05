@@ -56,7 +56,7 @@ python nn.py
 
 ![Second output of simple nn](./images/gaidd35.png?raw=true "Second output of simple nn")
 
-11. If you get done early, feel free to try other combinations of training inputs and training outputs.
+11. (Optional) If you get done early and want more to do, feel free to try other combinations of training inputs and training outputs.
     
 <p align="center">
 **[END OF LAB]**
@@ -100,7 +100,7 @@ python tokenizer.py roberta-base
 python tokenizer.py gpt2
 python tokenizer.py xlnet-large-cased
 ```
-8. If you finish early and want to, you can look up the models from step 7 on huggingface.co/models.
+8. (Optional) If you finish early and want more to do, you can look up the models from step 7 on huggingface.co/models.
    
 <p align="center">
 **[END OF LAB]**
