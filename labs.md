@@ -221,17 +221,16 @@ python sentiment.py
 
 **Purpose: In this lab, we’ll start getting familiar with Ollama, a way to run models locally.**
 
-1. First, to get *ollama* downloaded, execute the command below. Then you can run the actual application to see usage.
+1. We already have a script that can download and start Ollama and fetch some models we'll need in later labs. Take a look at the commands being done in the *../scripts/startOllama.sh* file. 
 ```
-curl -fsSL https://ollama.com/install.sh | sh
+cat ../scripts/startOllama.sh
 ```
-![downloading ollama](./images/dga36.png?raw=true "downloading ollama")
 
-2. Next, start the ollama server running with the following command:
+2. Go ahead and run the script to get Ollama and start it running.
 ```
-ollama serve &
+../scripts/startOllama.sh &
 ```
-![downloading ollama](./images/dga37.png?raw=true "downloading ollama")
+![starting ollama](./images/gaidd44.png?raw=true "starting ollama")
 
 3. Now let's find a model to use.
 Go to https://ollama.com and in the *Search models* box at the top, enter *llava*.
@@ -250,11 +249,11 @@ ollama run llava
 ```
 7. Now you can query the model by inputting text at the *>>>Send a message (/? for help)* prompt. Since this is a multimodal model, you can ask it about an image too. Try the following prompt that references a smiley face file in the repo.
 ```
-What's in this image?  images/smiley.jpg
+What's in this image?  ../samples/smiley.jpg
 ```
-![smiley face analysis](./images/dga64a.png?raw=true "Smiley face analysis")
+![smiley face analysis](./images/gaidd45.png?raw=true "Smiley face analysis")
 
-8. Now, let's try a call with the API. You can stop the current run with a Ctrl-D or switch to another terminal. Then put in the command below. 
+8. Now, let's try a call with the API. You can stop the current run with a Ctrl-D or switch to another terminal. Then put in the command below (or whatever simple prompt you want). 
 ```
 curl http://localhost:11434/api/generate -d '{
   "model": "llava",
@@ -265,7 +264,7 @@ curl http://localhost:11434/api/generate -d '{
 
 9. This will take a minute or so to run. You should see a single response object returned. You can try out some other prompts/queries if you want.
 
-![query response](./images/gaidd25.png?raw=true "Query response")
+![query response](./images/gaidd46.png?raw=true "Query response")
 
 <p align="center">
 **[END OF LAB]**
