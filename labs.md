@@ -275,33 +275,43 @@ curl http://localhost:11434/api/generate -d '{
 
 **Purpose: In this lab, we’ll learn about how to use vector databases for storing supporting data and doing similarity searches.**
 
-1. In our repository, we have a simple program built around a popular vector database called Chroma. The file name is genai_vectordb.py. Open the file either by clicking on [**genai_vectordb.py**](./genai_vectordb.py) or by entering the command below in the codespace's terminal.
+1. In our repository, we have a simple program built around a popular vector database called Chroma. The file name is vectordb.py. Open the file either by clicking on [**genai/vectordb.py**](./genai/vectordb.py) or by entering the command below in the codespace's terminal.
 
 ```
-code genai_vectordb.py
+code vectordb.py
 ```
 
-2. For purposes of not having to load a lot of data and documents, we've *seeded* some data strings in the file that we're loosely referring to as documents. These can be seen in the *docdata* section of the file.
+2. For purposes of not having to load a lot of data and documents, we've *seeded* some random data strings in the file that we're loosely referring to as *documents*. These can be seen in the *docdata* section of the file.
+![data docs](./images/gaidd47.png?raw=true "Data docs")
 
 3. Likewise, we've added some metadata in the way of categories for the data items. These can be seen in the categories section.
+![data categories](./images/gaidd48.png?raw=true "Data categories")
 
 4. Go ahead and run this program using the command shown below. This will take the document strings, create embeddings and vectors for them in the Chroma database section and then wait for us to enter a query.
 ```
-python genai_vectordb.py
+python vectordb.py
 ```
-5. You can enter a query here about any topic and the vector database functionality will try to find the most similar matching data that it has. Since we've only given it a set of 10 strings to work from, the results may not be relevant or very good, but represent the best similarity match the system could find based on the query. Go ahead and enter a query. Some sample ones are shown below, but you can choose others if you want. Just remember it will only be able to choose from the data we gave it.
+![waiting for input](./images/gaidd49.png?raw=true "Waiting for input")
+
+5. You can enter a query here about any topic and the vector database functionality will try to find the most similar matching data that it has. Since we've only given it a set of 10 strings to work from, the results may not be relevant or very good, but represent the best similarity match the system could find based on the query. Go ahead and enter a query. Some sample ones are shown below, but you can choose others if you want. Just remember it will only be able to choose from the data we gave it. The output will show the closest match from the doc strings and also the similarity and category.
 ```
 Tell me about food.
 Who is the most famous person?
 How can I learn better?
 ```
+![query results](./images/gaidd50.png?raw=true "Query results")
+
 6. After you've entered and run your query, you can add another one or just type *exit* to stop.
 
-7. Next, try multiple queries (separated by commas).
+7. Now, let's update the number of results that are returned so we can query on multiple topics. In the file *vectordb.py*, change line 70 to say *n_results=3,* instead of *n_results=1,*. Make sure to save your changes afterwards.
 
-8. Update the number of results to return by editing the file and running it again.
+![changed number of results](./images/gaidd51.png?raw=true "Changed number of results")
 
-9. When done querying the data, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided.
+8. Now you can try more complex queries or try multiple queries (separated by commas).
+
+![multiple queries](./images/gaidd52.png?raw=true "Multiple queries")
+ 
+9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided.
 
 <p align="center">
 **[END OF LAB]**
