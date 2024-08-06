@@ -5,7 +5,7 @@ from langchain_community.tools import DuckDuckGoSearchRun
 from crewai_tools import tool
 
 
-llm = Ollama(model="mistral")
+llm = Ollama(model="mannix/phi3-mini-4k")
 
 # Define custom search tool
 #@tool('DuckDuckGoSearch')
@@ -25,9 +25,8 @@ researcher = Agent(
     allow_delegation=False,
     tools=[search],
     llm=llm,
-#     max_iter=5,
-#     max_execution_time=1,
      )
+
 writer = Agent(
      name="Writer",
      role="Technical Writer",
@@ -36,8 +35,6 @@ writer = Agent(
      verbose=True,
      allow_delegation=True,
      llm=llm,
-#     max_iter=5,
-#     max_execution_time=1,
      )
 
 # Define task
@@ -49,7 +46,7 @@ def summarize_info(topic):
   return summary
 
 # Create and run the Crew
-task = Task(description="Summarize a topic", function=summarize_info, args=["olympic"],expected_output="summary of olympic info", agent=writer)
+task = Task(description="Summarize a topic", function=summarize_info, args=["olympics"],expected_output="summary of olympics info", agent=writer)
 crew = Crew(agents=[researcher, writer], tasks=[task])
 result = crew.kickoff()
 
