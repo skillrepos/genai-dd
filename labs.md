@@ -318,26 +318,40 @@ How can I learn better?
 </p>
 </br></br>
 
-**Lab 8 - Working with RAG**
+**Lab 7 - Working with RAG**
 
 **Purpose: In this lab, we’ll build on the use of vector databases to parse a PDF and allow us to include it in context for LLM queries.**
 
-1. In our repository, we have a simple program built for doing basic RAG processing. The file name is genai_rag.py. Open the file either by clicking on [**genai_rag.py**](./genai_rag.py) or by entering the command below in the codespace's terminal.
+1. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the command below in the codespace's terminal.
 
 ```
-code genai_rag.py
+code rag.py
 ```
 
-2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *test.pdf* in the directory. Go ahead and run the program and pass the pdf as the argument to it.
+2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.
 
+3. You can now run the program and pass in the ../samples/data.pdf file. This will read in the pdf and tokenize it and store it in the vector database. 
 ```
-python genai_rag.py test.pdf
+python rag.py ../samples/data.pdf
 ```
+![reading in the pdf](./images/gaidd54.png?raw=true "Reading in the PDF")
 
-3. This PDF is actually a ...  .  It has more recent data than what the LLM was trained on. The program will be waiting for a query. Let's ask it a query for some information it could only get from a more recent source - the PDF.
+4. The program will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below.
 ```
-<insert question here>
+What does the document say about art and literature topics?
 ```
+5. The response should include only conclusions based off the information in the document.
+![results from the doc](./images/gaidd56.png?raw=true "Results from the doc")
+  
+6. Now, let's ask it a query for some information that could come partly from the PDF. For example, try the query below. Then hit enter.
+```
+Give me 5 facts about the Mona Lisa
+```
+7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc and the rest from the LLM's trained knowledge.
+
+![5 facts about the Mona Lisa](./images/gaidd55.png?raw=true "5 facts about the Mona Lisa")
+   
+8. 
 <p align="center">
 **[END OF LAB]**
 </p>
