@@ -2,8 +2,7 @@ import crewai
 from langchain_community.llms import Ollama
 from langchain_community.tools import DuckDuckGoSearchRun
 from crewai_tools import tool
-
-llm = Ollama(model="mistral")
+llm = Ollama(model="mannix/phi3-mini-4k")
 
 def callback_function(output):
     print(f"Task completed: {output.raw_output}")
@@ -15,13 +14,13 @@ def search(search_query: str) -> str:
 
 agent = crewai.Agent(
     role="Calendar",
-    goal="What day of the month is Thanksgiving on in 2024?",
+    goal="What day of the month is Thanksgiving on in the current year?",
     backstory="You are a calendar assistant. You provide information about dates. ",
     tools=[search],
     llm=llm,
     allow_delegation=False, verbose=True)
 
-task = crewai.Task(description="What day of the month is Thanksgiving on in 2024?",
+task = crewai.Task(description="What day of the month is Thanksgiving on in the current year?",
                    agent=agent,
                    expected_output="Date of Thanksgiving in the current year")
 
