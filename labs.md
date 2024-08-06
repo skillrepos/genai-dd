@@ -330,7 +330,7 @@ code rag.py
 
 2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.
 
-3. You can now run the program and pass in the ../samples/data.pdf file. This will read in the pdf and tokenize it and store it in the vector database. 
+3. You can now run the program and pass in the ../samples/data.pdf file. This will read in the pdf and tokenize it and store it in the vector database. (Note: A different PDF file can be used, but it needs to be one that is primarily just text. The PDF parsing being used here isn't sophisticated enough to handle images, etc.)
 ```
 python rag.py ../samples/data.pdf
 ```
@@ -351,7 +351,30 @@ Give me 5 facts about the Mona Lisa
 
 ![5 facts about the Mona Lisa](./images/gaidd55.png?raw=true "5 facts about the Mona Lisa")
    
-8. 
+8. There is also a version of this file that includes a UI developed with *Streamlit*. The file name is ui_rag.py. Open the file either by clicking on [**genai/ui_rag.py**](./genai/ui_rag.py) or by entering the command below in the codespace's terminal.
+
+```
+code ui_rag.py
+```
+9. Like the previous program, this file will need a simple PDF file to be used. For convenience, there are two simple *text* PDFs in a GitHub gist (at https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f) that you can download via the command below. You want to run this on your own machine, not in the codespace. This will put the files in a directory named *datafiles* wherever you run it.
+
+```
+git clone https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f datafiles
+```
+
+10. Now you can run the version of the rag program with the UI using Streamlit and the command below. (Execute this in the codespace terminal. Streamlit should already be installed for you.)  After you start this, it will open up the webapp and you should see a popup in the codespace to allow you to easily access the app.
+```
+streamlit run ui_rag.py
+```
+
+11. After opeing up the website for the app, you can upload one of the PDF files and ask a question like you did before. The app will show evidence of *Running* in the upper right corner. Also, if you want, you can look back in the codespace's terminals and see the LLM being invoked.
+
+![app running](./images/gaidd58.png?raw=true "App running")
+![llm being accessed](./images/gaidd56.png?raw=true "LLM being accessed")
+
+12. This will take a while to run. (You can just leave it running while we proceed with the next section.) When done, you should see a similar set of answers as you did running the non-UI version.
+
+![app with_answer](./images/gaidd60.png?raw=true "App with answer")
 <p align="center">
 **[END OF LAB]**
 </p>
