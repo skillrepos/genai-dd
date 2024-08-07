@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 2.0 - 08/06/24
+## Revision 2.1 - 08/07/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -22,7 +22,14 @@ cd genai
 code nn.py
 ```
 
-3. Scroll down to around line 55. Notice the *training_inputs* data and the *training_outputs* data. Each row of the *training_outputs* is what we want the model to predict for the corresponding input row. As coded, the output for the sample inputs ends up being the same as the first element of the array.  For inputs [0,0,1] we are trying to train the model to predict [0]. For the inputs [1,0,1], we are trying to train the model to predict [1], etc.
+3. Scroll down to around line 55. Notice the *training_inputs* data and the *training_outputs* data. Each row of the *training_outputs* is what we want the model to predict for the corresponding input row. As coded, the output for the sample inputs ends up being the same as the first element of the array.  For inputs [0,0,1] we are trying to train the model to predict [0]. For the inputs [1,0,1], we are trying to train the model to predict [1], etc. The table below may help to explain.
+
+| **Dataset** | **Values** | **Desired Prediction** |
+| :---------: | :--------: | :--------------------: |
+| **1** |  0  0  1  |            0           |
+| **2** |  1  1  1  |            1           |
+| **3** |  1  0  1  |            1           |
+| **4** |  0  1  1  |            0           |
 
 4. When we run the program, it will train the neural net to try and predict the outputs corresponding to the inputs. You will see the random training weights to start and then the adjusted weights to make the model predict the output. You will then be prompted to put in your own training data. We'll look at that in the next step. For now, go ahead and run the program (command below) but don't put in any inputs yet. Just notice how the weights have been adjusted after the training process.
 
