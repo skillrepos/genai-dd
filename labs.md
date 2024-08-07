@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 2.2 - 08/07/24
+## Revision 2.3 - 08/07/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -318,7 +318,7 @@ How can I learn better?
 
 ![changed number of results](./images/gaidd51.png?raw=true "Changed number of results")
 
-8. Now you can try more complex queries or try multiple queries (separated by commas).
+8. Run the program again with *python vectordb.py*. Now you can try more complex queries or try multiple queries (separated by commas). 
 
 ![multiple queries](./images/gaidd52.png?raw=true "Multiple queries")
  
