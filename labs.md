@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 1.2 - 08/04/24
+## Revision 2.0 - 08/06/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
