@@ -380,6 +380,50 @@ streamlit run ui_rag.py
 </p>
 </br></br>
 
+**Lab 8 - Working with Agents**
+
+**Purpose: In this lab, we’ll see how to use Agents to accomplish specialized tasks with LLMs.**
+
+1. For this lab, we're going to use a smaller LLM to save some processing time. The LLM we'll be using is *mannix/phi3-mini-4k*.  We'll add it by pulling it with *ollama*. We'll also remove the *mistral* LLM to save some room on the system. In a terminal in the codespace, execute the two commands below. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the commands below in the codespace's terminal.
+```
+ollama rm mistral
+ollama pull mannix/phi3-mini-4k
+```
+
+2. In the repository, there are a couple of AI agent Python programs - [**genai/agent-shopper.py**](./genai/agent-shopper.py) and [**genai/agent-date.py**](./genai/agent-date.py). Go ahead and open the *agent-shopper.py* one and let's take a look at its structure. This agent is intended to find a good deal on a laptop that is less than $1000.
+```
+code agent-shopper.py
+```
+
+3. Looking at the code, after the imports, there is the load of the LLM, followed by some tool definitions that use a standard DuckDuckGoSearchRun function. The first named "Search Amazon" is one that limits web searches to the amazon site. The next is a more generic search function. Unfortunately, these searches can be hit or miss depending on API limiting by DuckDuckGo and other factors. But they show one way to define tools.
+
+4. The callback function is on to show the raw output when an agent finishes a task. This is followed by definitions for the CrewAI Agent, Task and a call to the Crew kickoff method to start things running and then print the results. Go ahead and run the agent program via the command below.
+```
+python agent-shopper.py
+```
+5. This will run for a long time. If we do not run into issues with the search calls, it should eventually complete with a recommendation for a laptop. You may not see output on the screen changing for several minutes. However, the real value of running this is seeing the *Thoughts* and *Actions* that the agent decides on. Those should pop up on the screen in colored text along the way.  Also, if you look in the terminal where Ollama was started most recently, you'll be able to see the LLM being started and rest calls happening.
+
+6. You can leave this running and proceed to the next steps in a separate terminal by clicking on the "+" sign over in the upper right corner of the terminal section. In a new terminal, open up our implementation of a multi-agent crew by opening [**genai/crew.py**](./genai/crew.py).
+```
+code crew.py
+```
+
+7. This program should look similar to the singe agent one, except it defines multiple agents, and the invocation for the task calls a separate function to do the work. Go ahead and run it in the new terminal.
+```
+python crew.py
+```
+
+8. Again, this will take many minutes to run. But the interesting parts will be the *Thoughts* and *Actions* that are generated as it is running. Note that the agents are deciding for themselves what to do, how to change the prompt or query, etc.
+
+9. You can leave these running if you want and they should eventually complete, thought it may take a long time. Or you can cancel them. If you want, you can also try out the *agent-date.py* agent implementation. This one tries to determine what day of the month Thanksgiving will be on in the current year. It is not recommended to have all 3 of the agent/crew programs running at the same time.
+
+10. When you are done, if you want, you can try tweaking some values or settings in the various programs.
+
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>   
+
 <p align="center">
 **THANKS!**
 </p>
