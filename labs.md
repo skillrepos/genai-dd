@@ -354,38 +354,37 @@ What does the document say about art and literature topics?
 5. The response should include only conclusions based off the information in the document.
 ![results from the doc](./images/gaidd56.png?raw=true "Results from the doc")
   
-6. Now, let's ask it a query for some information that could come partly from the PDF. For example, try the query below. Then hit enter.
+6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter.
 ```
 Give me 5 facts about the Mona Lisa
 ```
-7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc and the rest from the LLM's trained knowledge.
+7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc. But the other facts are also based on this one or the LLM telling you couldn't produce any other different facts. 
 
 ![5 facts about the Mona Lisa](./images/gaidd55.png?raw=true "5 facts about the Mona Lisa")
    
-8. There is also a version of this file that includes a UI developed with *Streamlit*. The file name is ui_rag.py. Open the file either by clicking on [**genai/ui_rag.py**](./genai/ui_rag.py) or by entering the command below in the codespace's terminal.
+8. The reason the LLM couldn't add any other facts was due to the PROMPT_TEMPLATE we have in the file. Take a look at it starting around line 29. Note how it limits the LLM to only using the context that comes from our doc (line 51).
+
+![prompt template](./images/rag30.png?raw=true "prompt template")
+
+![doc context](./images/rag31.png?raw=true "doc context")
+
+9. To change this so the LLM can use our context and its own training, we need to change the PROMPT_TEMPLATE. Replace the existing PROMPT_TEMPLATE at lines 29-37 with the lines below. Afterwards, your changes should look like the screenshot below.
+```
+PROMPT_TEMPLATE = """
+Answer the question: {question} using whatever resources you have.
+Include any related information from {context} as part of your answer.
+Provide a detailed answer.
+Don’t justify your answers.
+"""
+```
+![new prompt template](./images/rag32.png?raw=true "new prompt template")
+
+10. **Save your changes** and run the program. This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.
 
 ```
-code ui_rag.py
+python rag.py ../samples/data.pdf
 ```
-9. Like the previous program, this file will need a simple PDF file to be used. For convenience, there are two simple *text* PDFs in a GitHub gist (at https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f) that you can download via the command below. You want to run this on your own machine, not in the codespace. This will put the files in a directory named *datafiles* wherever you run it.
-
-```
-git clone https://gist.github.com/brentlaster/cd5d9fd57ecc2537f1269270ac2e228f datafiles
-```
-
-10. Now you can run the version of the rag program with the UI using Streamlit and the command below. (Execute this in the codespace terminal. Streamlit should already be installed for you.)  After you start this, it will open up the webapp and you should see a popup in the codespace to allow you to easily access the app.
-```
-streamlit run ui_rag.py
-```
-
-11. After opeing up the website for the app, you can upload one of the PDF files and ask a question like you did before. The app will show evidence of *Running* in the upper right corner. Also, if you want, you can look back in the codespace's terminals and see the LLM being invoked.
-
-![app running](./images/gaidd58.png?raw=true "App running")
-![llm being accessed](./images/gaidd56.png?raw=true "LLM being accessed")
-
-12. This will take a while to run. (You can just leave it running while we proceed with the next section.) When done, you should see a similar set of answers as you did running the non-UI version.
-
-![app with_answer](./images/gaidd60.png?raw=true "App with answer")
+![new output](./images/rag33.png?raw=true "new output")
 <p align="center">
 **[END OF LAB]**
 </p>
