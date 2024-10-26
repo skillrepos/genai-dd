@@ -351,10 +351,10 @@ python rag.py ../samples/data.pdf
 ```
 What does the document say about art and literature topics?
 ```
-5. The response should include only conclusions based off the information in the document.
+5. This can take 3 to 4 minutes to execute in our codespace. The response should include only conclusions based off the information in the document.
 ![results from the doc](./images/gaidd56.png?raw=true "Results from the doc")
   
-6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter.
+6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter. This again will take a long time to run. While it runs, you can move on to steps 7-9.
 ```
 Give me 5 facts about the Mona Lisa
 ```
