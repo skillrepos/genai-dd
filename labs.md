@@ -358,11 +358,11 @@ What does the document say about art and literature topics?
 ```
 Give me 5 facts about the Mona Lisa
 ```
-7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc. But the other facts are also based on this one or the LLM telling you couldn't produce any other different facts. 
+7. In the data.pdf file, there may be multiple facts about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc. But the other facts may be based on this one or the LLM telling you couldn't produce any other different facts. 
 
 ![5 facts about the Mona Lisa](./images/gaidd55.png?raw=true "5 facts about the Mona Lisa")
    
-8. The reason the LLM couldn't add any other facts was due to the PROMPT_TEMPLATE we have in the file. Take a look at it starting around line 29. Note how it limits the LLM to only using the context that comes from our doc (line 51).
+8. One of the limitations we have given the LLM is due to the PROMPT_TEMPLATE we have in the file. Take a look at it starting around line 29. Note how it attempts to limit the LLM to only using the context that comes from our doc (line 51).
 
 ![prompt template](./images/rag30.png?raw=true "prompt template")
 
@@ -379,7 +379,7 @@ Don’t justify your answers.
 ```
 ![new prompt template](./images/rag32.png?raw=true "new prompt template")
 
-10. **Save your changes** and run the program. This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.
+10. **Save your changes** and run the program. Query it the same query from step 6. This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.
 
 ```
 python rag.py ../samples/data.pdf
