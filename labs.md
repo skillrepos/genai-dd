@@ -292,10 +292,10 @@ curl http://localhost:11434/api/generate -d '{
 code vectordb.py
 ```
 
-2. For purposes of not having to load a lot of data and documents, we've *seeded* some random data strings in the file that we're loosely referring to as *documents*. These can be seen in the *docdata* section of the file.
+2. For purposes of not having to load a lot of data and documents, we've *seeded* the same data strings in the file that we're loosely referring to as *documents*. These can be seen in the *datadocs* section of the file.
 ![data docs](./images/gaidd47.png?raw=true "Data docs")
 
-3. Likewise, we've added some metadata in the way of categories for the data items. These can be seen in the categories section.
+3. Likewise, we've added the metadata again for categories for the data items. These can be seen in the *categories* section.
 ![data categories](./images/gaidd48.png?raw=true "Data categories")
 
 4. Go ahead and run this program using the command shown below. This will take the document strings, create embeddings and vectors for them in the Chroma database section and then wait for us to enter a query.
