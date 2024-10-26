@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 2.3 - 08/07/24
+## Revision 2.4 - 10/25/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -46,7 +46,7 @@ python nn.py
 
 ![Prediction close to first input](./images/gaidd32.png?raw=true "Prediction close to first input") 
 
-7. Now, let's see what happens if we change the expected outputs to be different. In the editor for the genai_nn.py file, find the line for the *training_outputs*. Modify the values in the array to be ([[0],[1],[0],[1]]). These are the values of the second element in each of the training data entries. After you're done, save your changes as shown below.
+7. Now, let's see what happens if we change the expected outputs to be different. In the editor for the genai_nn.py file, find the line for the *training_outputs*. Modify the values in the array to be ([[0],[1],[0],[1]]). These are the values of the second element in each of the training data entries. After you're done, save your changes as shown below, or use the keyboard shortcut.
 
 ![Modifying expected outputs](./images/gaidd33.png?raw=true "Modifying expected outputs")
 ![Saving changes](./images/gaidd9.png?raw=true "Saving changes")
