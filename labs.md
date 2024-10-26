@@ -174,7 +174,7 @@ python vectors.py bert-base-cased 768
 
 **Purpose: In this lab, we’ll see how to interact with various models for different standard tasks**
 
-1. In our repository, we have several different Python programs that utilize transformer models for standard types of LLM tasks. One of them is a simple a simple translation example. The file name is genai_translation.py. Open the file either by clicking on [**genai/translation.py**](./genai/translation.py) or by entering the command below in the codespace's terminal.
+1. In our repository, we have several different Python programs that utilize transformer models for standard types of LLM tasks. One of them is a simple translation example. The file name is genai_translation.py. Open the file either by clicking on [**genai/translation.py**](./genai/translation.py) or by entering the command below in the codespace's terminal.
 
 ```
 code translation.py
