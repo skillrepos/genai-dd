@@ -1,10 +1,9 @@
 import crewai
 from langchain_community.tools import DuckDuckGoSearchRun
 from crewai_tools import tool
-from crewai_tools import WebsiteSearchTool
 
 # Import the LLM class
-from crewai import Agent, LLM
+from crewai import LLM
     
 llm=LLM(
     model="ollama/mannix/phi3-mini-4k"
