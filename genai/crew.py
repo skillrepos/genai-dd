@@ -4,7 +4,7 @@ from crewai_tools import tool
 from crewai_tools import WebsiteSearchTool
 
 # Import the LLM class
-from crewai import Agent, LLM
+from crewai import Agent, LLM, Crew, Task
 
     
 llm=LLM(
