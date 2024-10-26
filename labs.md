@@ -379,7 +379,7 @@ Don’t justify your answers.
 ```
 ![new prompt template](./images/rag32.png?raw=true "new prompt template")
 
-10. **Save your changes** and run the program. Query it the same query from step 6. This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.
+10. **Save your changes** and run the program. Query it the same query from step 6. This time, the program will run for several minutes and then the LLM should return 5 more detailed facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below. (Note this will take multiple minutes again to run. You can just leave it running while we proceed to the next section.)
 
 ```
 python rag.py ../samples/data.pdf
