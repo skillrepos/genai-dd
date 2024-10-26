@@ -1,10 +1,14 @@
 import crewai
-from langchain_community.llms import Ollama
 from langchain_community.tools import DuckDuckGoSearchRun
 from crewai_tools import tool
 from crewai_tools import WebsiteSearchTool
 
-llm = Ollama(model="mannix/phi3-mini-4k")
+# Import the LLM class
+from crewai import Agent, LLM
+    
+llm=LLM(
+    model="ollama/mannix/phi3-mini-4k"
+)
 
 @tool("Search Amazon")
 def search_amazon(q: str) -> str:
