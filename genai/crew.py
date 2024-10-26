@@ -1,11 +1,15 @@
-from crewai import Crew, Agent, Task
-
-from langchain_community.llms import Ollama
+import crewai
 from langchain_community.tools import DuckDuckGoSearchRun
 from crewai_tools import tool
+from crewai_tools import WebsiteSearchTool
 
+# Import the LLM class
+from crewai import Agent, LLM
 
-llm = Ollama(model="mannix/phi3-mini-4k")
+    
+llm=LLM(
+    model="ollama/mannix/phi3-mini-4k"
+)
 
 # Define custom search tool
 #@tool('DuckDuckGoSearch')
