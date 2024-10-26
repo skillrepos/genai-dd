@@ -3,7 +3,7 @@ from langchain_community.tools import DuckDuckGoSearchRun
 from crewai_tools import tool
 from crewai_tools import WebsiteSearchTool
 
-# Import the LLM class
+# Import the necessary CrewAI classes
 from crewai import Agent, LLM, Crew, Task
 
     
