@@ -9,8 +9,6 @@ torchvision>=0.18.0
 transformers>=4.40.2
 chromadb>=0.4.24
 sentence_transformers
-crewai
-crewai_tools
 langchain_community>=0.2.6
 fastembed>=0.3.2
 duckduckgo-search
