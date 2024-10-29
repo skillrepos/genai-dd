@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 2.4 - 10/25/24
+## Revision 2.5 - 10/29/24
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -333,7 +333,31 @@ How can I learn better?
 
 **Purpose: In this lab, we’ll build on the use of vector databases to parse a PDF and allow us to include it in context for LLM queries.**
 
-1. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the command below in the codespace's terminal.
+1. For this lab and the next, we will be using a Google Colab environment so we can use a free GPU to make these run in a reasonable amount of time. If you haven't already, go to https://colab.research.google.com and create an account and sign in or sign in with a Google account.
+
+![colab sign in](./images/gaidd61.png?raw=true "Colab sign in")
+
+2. Click on the "New notebook" button to open a new notebook.
+
+![colab new notebook](./images/gaidd62.png?raw=true "Colab new notebook")
+
+3. Now select the small down arrow next to the "Connect" link in the upper right. In the menu that comes up, select the entry to "Change runtime type".
+
+![change runtime type](./images/gaidd63.png?raw=true "Change runtime type")
+
+4. In the dialog that comes up, choose the "T4 GPU" entry under "Hardware accelerator" and then make sure to Save your changes.
+
+![change runtime type](./images/gaidd64.png?raw=true "Change runtime type")  
+
+5. Click on the Connect button now to connect to a new session with the GPU. After you are connected, you should see an indicator of the resources showing in the same area as where the Connect button was.
+
+
+![connect to runtime](./images/gaidd65.png?raw=true "Connect to runtime")  
+
+![connected to runtime](./images/gaidd66.png?raw=true "Connected to runtime")  
+
+
+7. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the command below in the codespace's terminal.
 
 ```
 code rag.py
