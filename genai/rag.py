@@ -10,7 +10,7 @@ from langchain_community.llms import Ollama
 CHROMA_DATA_PATH = "vdb_data/"
 DOC_PATH = sys.argv[1]
 
-llm = Ollama(model="mistral")
+llm = Ollama(model="llama3.2")
 
 # load your pdf doc
 loader = PyPDFLoader(DOC_PATH)
