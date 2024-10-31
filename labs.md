@@ -38,7 +38,7 @@ python nn.py
 ```
 ![Starting run of simple nn](./images/gaidd30.png?raw=true "Starting run of simple nn") 
 
-5. What you should see is that the weights after training are now set in a way that makes it more likely that the result will match the expected output value. To prove this out, you can enter your own input set - just use 1's and 0's for each input. 
+5. What you should see is that the weights after training are now set in a way that makes it more likely that the result will match the expected output value. (The higher positive value for the first weight means that the model has looked at the training data and realized it should "weigh" the first input higher in its prediction.) To prove this out, you can enter your own input set - just use 1's and 0's for each input. 
 
 ![Inputs to simple nn](./images/gaidd31.png?raw=true "Inputs to simple nn") 
 
