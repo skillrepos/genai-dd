@@ -403,11 +403,11 @@ python rag.py ../samples/data.pdf
 
 1. In this lab, we'll download a medical dataset, parse it into a vector database, and create an agent with a tool to help us get answers. First,let's take a look at a dataset of information we'll be using for our RAG context. We'll be using a medical Q&A dataset called [**keivalya/MedQuad-MedicalQnADataset**](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset). You can go to the page for it on HuggingFace.co and view some of it's data or explore it a bit if you want. To get there, either click on the link above in this step or go to HuggingFace.co and search for "keivalya/MedQuad-MedicalQnADataset" and follow the links.
    
-![dataset on huggingface](./images/rag27.png?raw=true "dataset on huggingface")    
+![dataset on huggingface](./images/gaidd76.png?raw=true "dataset on huggingface")    
 
 2. Now, let's create the Python file that will pull the dataset, store it in the vector database and invoke an agent with the tool to use it as RAG. First, create a new file for the project.
 ```
-code lab6.py
+code lab8.py
 ```
 
 3. Now, add the imports.
