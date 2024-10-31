@@ -337,17 +337,18 @@ How can I learn better?
 
 ![colab sign in](./images/gaidd61.png?raw=true "Colab sign in")
 
-2. Click on the "New notebook" button to open a new notebook.
+2. Now, in a browser tab, go to https://github.com/skillrepos/genai-collab In the README.md file, click on the "Open in Colab" button next to "Click here to open RAG example".
 
-![colab new notebook](./images/gaidd62.png?raw=true "Colab new notebook")
+![open rag example](./images/gaidd70.png?raw=true "Open RAG example")
 
-3. Now select the small down arrow next to the "Connect" link in the upper right. In the menu that comes up, select the entry to "Change runtime type".
+3. You should now be in a Collab session with the notebook loaded. The notebook has code and documentation in one file with each section broken out. Before we run it, we need to connect to a GPU (if available).  Click on the small down arrow next to the "Connect" link in the upper right. In the menu that comes up, select the entry to "Change runtime type".
 
-![change runtime type](./images/gaidd63.png?raw=true "Change runtime type")
+![change runtime type](./images/gaidd71.png?raw=true "Change runtime type")
+
 
 4. In the dialog that comes up, choose the "T4 GPU" entry under "Hardware accelerator" and then make sure to Save your changes.
 
-![change runtime type](./images/gaidd64.png?raw=true "Change runtime type")  
+![change runtime type](./images/gaidd72.png?raw=true "Change runtime type")  
 
 5. Click on the Connect button now to connect to a new session with the GPU. After you are connected, you should see an indicator of the resources showing in the same area as where the Connect button was.
 
@@ -357,25 +358,15 @@ How can I learn better?
 ![connected to runtime](./images/gaidd66.png?raw=true "Connected to runtime")  
 
 
-7. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the command below in the codespace's terminal.
+6. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.  Run the program by clicking on the *Runtime* menu at the top and selecting *Run all*.  Just click on the *Run anyway* on the Warning dialog.
 
-```
-code rag.py
-```
+![Running the code](./images/gaidd73.png?raw=true "Running the code")   
 
-2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.
-
-3. You can now run the program and pass in the ../samples/data.pdf file. This will read in the pdf and tokenize it and store it in the vector database. (Note: A different PDF file can be used, but it needs to be one that is primarily just text. The PDF parsing being used here isn't sophisticated enough to handle images, etc.)
-```
-python rag.py ../samples/data.pdf
-```
-![reading in the pdf](./images/gaidd54.png?raw=true "Reading in the PDF")
-
-4. The program will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below.
+7. The program will run for several minutes and then will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below.
 ```
 What does the document say about art and literature topics?
 ```
-5. This can take 3 to 4 minutes to execute in our codespace. The response should include only conclusions based off the information in the document.
+8. This can take another couple of minutes to execute. The response should include only conclusions based off the information in the document.
 ![results from the doc](./images/gaidd56.png?raw=true "Results from the doc")
   
 6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter. This again will take a long time to run. While it runs, you can move on to steps 7-9.
