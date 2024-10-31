@@ -324,60 +324,51 @@ How can I learn better?
  
 9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided. You can type in "exit" for the query to end the program.
 
+10. In preparation for the next lab, remove the *mistral* model from Ollama's cache and download the *llama3.2* model.
+```
+ollama rm mistral
+ollama pull llama3.2
+```
+
 <p align="center">
 **[END OF LAB]**
 </p>
 </br></br>
 
-**Lab 7 - Working with RAG**
+**Lab 7 - Working with RAG implemented with vector databases**
 
 **Purpose: In this lab, we’ll build on the use of vector databases to parse a PDF and allow us to include it in context for LLM queries.**
 
-1. For this lab and the next, we will be using a Google Colab environment so we can use a free GPU to make these run in a reasonable amount of time. If you haven't already, go to https://colab.research.google.com and create an account and sign in or sign in with a Google account.
+1. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the command below in the codespace's terminal.
 
-![colab sign in](./images/gaidd61.png?raw=true "Colab sign in")
+```
+code rag.py
+```
 
-2. Now, in a browser tab, go to https://github.com/skillrepos/genai-collab In the README.md file, click on the "Open in Colab" button next to "Click here to open RAG example".
+2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.
 
-![open rag example](./images/gaidd70.png?raw=true "Open RAG example")
+3. You can now run the program and pass in the ../samples/data.pdf file. This will read in the pdf and tokenize it and store it in the vector database. (Note: A different PDF file can be used, but it needs to be one that is primarily just text. The PDF parsing being used here isn't sophisticated enough to handle images, etc.)
+```
+python rag.py ../samples/data.pdf
+```
+![reading in the pdf](./images/gaidd54.png?raw=true "Reading in the PDF")
 
-3. You should now be in a Collab session with the notebook loaded. The notebook has code and documentation in one file with each section broken out. Before we run it, we need to connect to a GPU (if available).  Click on the small down arrow next to the "Connect" link in the upper right. In the menu that comes up, select the entry to "Change runtime type".
-
-![change runtime type](./images/gaidd71.png?raw=true "Change runtime type")
-
-
-4. In the dialog that comes up, choose the "T4 GPU" entry under "Hardware accelerator" and then make sure to Save your changes.
-
-![change runtime type](./images/gaidd72.png?raw=true "Change runtime type")  
-
-5. Click on the Connect button now to connect to a new session with the GPU. After you are connected, you should see an indicator of the resources showing in the same area as where the Connect button was.
-
-
-![connect to runtime](./images/gaidd65.png?raw=true "Connect to runtime")  
-
-![connected to runtime](./images/gaidd66.png?raw=true "Connected to runtime")  
-
-
-6. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.  Run the program by clicking on the *Runtime* menu at the top and selecting *Run all*.  Just click on the *Run anyway* on the Warning dialog.
-
-![Running the code](./images/gaidd73.png?raw=true "Running the code")   
-
-7. The program will run for several minutes and then will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below.
+4. The program will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below.
 ```
 What does the document say about art and literature topics?
 ```
-8. This can take another couple of minutes to execute. The response should include only conclusions based off the information in the document.
-![results from the doc](./images/gaidd56.png?raw=true "Results from the doc")
+5. The response should include only conclusions based off the information in the document.
+![results from the doc](./images/gaidd74.png?raw=true "Results from the doc")
   
-6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter. This again will take a long time to run. While it runs, you can move on to steps 7-9.
+6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter.
 ```
 Give me 5 facts about the Mona Lisa
 ```
-7. In the data.pdf file, there may be multiple facts about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see this fact near the top as the tools pull the fact from the doc. But the other facts may be based on this one or the LLM telling you couldn't produce any other different facts. 
+7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see only this fact or you might see other assertions based off of this one. 
 
-![5 facts about the Mona Lisa](./images/gaidd55.png?raw=true "5 facts about the Mona Lisa")
+![5 facts about the Mona Lisa](./images/gaidd75.png?raw=true "5 facts about the Mona Lisa")
    
-8. One of the limitations we have given the LLM is due to the PROMPT_TEMPLATE we have in the file. Take a look at it starting around line 29. Note how it attempts to limit the LLM to only using the context that comes from our doc (line 51).
+8. The reason the LLM couldn't add any other facts was due to the PROMPT_TEMPLATE we have in the file. Take a look at it starting around line 29. Note how it limits the LLM to only using the context that comes from our doc (line 51).
 
 ![prompt template](./images/rag30.png?raw=true "prompt template")
 
@@ -394,17 +385,17 @@ Don’t justify your answers.
 ```
 ![new prompt template](./images/rag32.png?raw=true "new prompt template")
 
-10. **Save your changes** and run the program. Query it the same query from step 6. This time, the program will run for several minutes and then the LLM should return 5 more detailed facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below. (Note this will take multiple minutes again to run. You can just leave it running while we proceed to the next section.)
+10. **Save your changes**. Type "exit" to end the current run and then run the updated code. Enter the same query "Give me 5 facts about the Mona Lisa". This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.  (If the answer isn't returned by the time the break is over, you can just leave it running and check back later.)
 
 ```
 python rag.py ../samples/data.pdf
 ```
 ![new output](./images/rag33.png?raw=true "new output")
+
 <p align="center">
 **[END OF LAB]**
 </p>
 </br></br>
-
 **Lab 8 - Working with Agents**
 
 **Purpose: In this lab, we’ll see how to use Agents to accomplish specialized tasks with LLMs.**
