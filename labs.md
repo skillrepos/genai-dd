@@ -322,7 +322,7 @@ How can I learn better?
 
 ![multiple queries](./images/gaidd52.png?raw=true "Multiple queries")
  
-9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided.
+9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided. You can type in "exit" for the query to end the program.
 
 <p align="center">
 **[END OF LAB]**
