@@ -460,7 +460,7 @@ conversational_memory = ConversationBufferWindowMemory(
     return_messages=True #Must return the messages in the response.
 )
 
-llm = Ollama(model="llama3",temperature=0.0)
+llm = Ollama(model="llama3.2",temperature=0.0)
 ```
 
 7. Now, define the mechanism to use for the agent and retrieving data. ("qa" = question and answer) 
@@ -523,12 +523,15 @@ while True:
 ```
 10. Now, **save the file** and run the code.
 ```
-python lab6.py
+python lab8.py
 ```
 11. You can prompt it with queries related to the info in the dataset, like:
 ```
 I have a patient that may have Botulism. How can I confirm the diagnosis?
 ```
+12. In our limited environment, this may take up to 10 minutes to return a final answer, but you will be able to see it going through the "reasoning" process and ultimately providing a response using the Medical KB tool.
+
+![response from agent](./images/gaidd77.png?raw=true "Response from agent")    
 
 <p align="center">
 **[END OF LAB]**
