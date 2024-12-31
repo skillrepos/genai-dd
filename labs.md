@@ -376,12 +376,12 @@ Give me 5 facts about the Mona Lisa
 
 9. To change this so the LLM can use our context and its own training, we need to change the PROMPT_TEMPLATE. Replace the existing PROMPT_TEMPLATE at lines 29-37 with the lines below. Afterwards, your changes should look like the screenshot below.
 ```
-PROMPT_TEMPLATE = """
-Answer the {question} based on this context:
-{context} and whatever other information you have. 
-Your response must include any relevant information from {context}.
-Provide a detailed answer.
-"""
+    PROMPT_TEMPLATE = """
+    Answer the question: {question} using whatever resources you have.
+    Include any related information from {context} as part of your answer but add additional information from the model.
+    Provide a detailed answer.
+    Don’t justify your answers.
+    """
 ```
 ![new prompt template](./images/gaidd78.png?raw=true "new prompt template")
 
