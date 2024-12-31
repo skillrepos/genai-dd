@@ -383,7 +383,7 @@ Give me 5 facts about the Mona Lisa
     Don’t justify your answers.
     """
 ```
-![new prompt template](./images/gaidd78.png?raw=true "new prompt template")
+![new prompt template](./images/gaidd79.png?raw=true "new prompt template")
 
 10. **Save your changes**. Type "exit" to end the current run and then run the updated code. Enter the same query "Give me 5 facts about the Mona Lisa". This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.  (If the answer isn't returned by the time the break is over, you can just leave it running and check back later.)
 
