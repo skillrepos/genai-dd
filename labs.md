@@ -353,7 +353,7 @@ python rag.py ../samples/data.pdf
 ```
 ![reading in the pdf](./images/gaidd54.png?raw=true "Reading in the PDF")
 
-4. The program will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below.
+4. The program will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below. (This will take a few minutes to run typically. Also, the response you get may vary from what is shown.)
 ```
 What does the document say about art and literature topics?
 ```
