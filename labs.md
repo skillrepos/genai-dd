@@ -324,9 +324,8 @@ How can I learn better?
  
 9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided. You can type in "exit" for the query to end the program.
 
-10. In preparation for the next lab, remove the *mistral* model from Ollama's cache and download the *llama3.2* model.
+10. In preparation for the next lab, download the *llama3.2* model.
 ```
-ollama rm mistral
 ollama pull llama3.2
 ```
 
