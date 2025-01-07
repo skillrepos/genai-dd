@@ -390,10 +390,11 @@ Give me 5 facts about the Mona Lisa
 ```
 python rag.py ../samples/data.pdf
 ```
-</br>
+</br></br>
 ```
 Give me 5 facts about the Mona Lisa
 ```
+</br></br>
 ![new output](./images/rag33.png?raw=true "new output")
 
 <p align="center">
