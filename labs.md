@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 2.9 - 01/07/25
+## Revision 3.0 - 01/07/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -385,10 +385,14 @@ Give me 5 facts about the Mona Lisa
 ```
 ![new prompt template](./images/gaidd79.png?raw=true "new prompt template")
 
-10. **Save your changes**. Type "exit" to end the current run and then run the updated code. Enter the same query "Give me 5 facts about the Mona Lisa". This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.  (If the answer isn't returned by the time the break is over, you can just leave it running and check back later.)
+10. **Save your changes**. Type "exit" to end the current run and then run the updated code. Enter the same query "Give me 5 facts about the Mona Lisa". This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.  (If the answer isn't returned by the time the break is over, you can just leave it running and check back later.)  You may also see info about other items in the doc in the output.
 
 ```
 python rag.py ../samples/data.pdf
+```
+</br>
+```
+Give me 5 facts about the Mona Lisa
 ```
 ![new output](./images/rag33.png?raw=true "new output")
 
