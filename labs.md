@@ -374,7 +374,7 @@ Give me 5 facts about the Mona Lisa
 
 ![doc context](./images/rag31.png?raw=true "doc context")
 
-9. To change this so the LLM can use our context and its own training, we need to change the PROMPT_TEMPLATE. Replace the existing PROMPT_TEMPLATE at lines 29-37 with the lines below. Afterwards, your changes should look like the screenshot below.
+9. To change this so the LLM can use our context and its own training, we need to change the PROMPT_TEMPLATE. Replace the existing PROMPT_TEMPLATE at lines 29-37 with the lines below. Afterwards, your changes should look like the screenshot below.  (If you see a red wavy line after pasting in the new template, you may need to remove some indenting. You can click on the *PROBLEMS* tab in the same row as *TERMINAL* to see the specific issues.)
 ```
     PROMPT_TEMPLATE = """
     Answer the question: {question} using whatever resources you have.
