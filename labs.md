@@ -368,7 +368,7 @@ Give me 5 facts about the Mona Lisa
 
 ![5 facts about the Mona Lisa](./images/gaidd75.png?raw=true "5 facts about the Mona Lisa")
    
-8. The reason the LLM couldn't add any other facts was due to the PROMPT_TEMPLATE we have in the file. Take a look at it starting around line 29. Note how it limits the LLM to only using the context that comes from our doc (line 51).
+8. The reason the LLM couldn't add any other facts was due to the PROMPT_TEMPLATE we have in the *rag.py* file. Take a look at it starting around line 29. Note how it limits the LLM to only using the context that comes from our doc (line 51).
 
 ![prompt template](./images/rag30.png?raw=true "prompt template")
 
