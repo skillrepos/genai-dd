@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 2.8 - 01/07/25
+## Revision 2.9 - 01/07/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -324,8 +324,9 @@ How can I learn better?
  
 9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided. You can type in "exit" for the query to end the program.
 
-10. In preparation for the next lab, download the *llama3.2* model.
+10. In preparation for the next lab, remove the *llava* model and download the *llama3.2* model.
 ```
+ollama rm llava
 ollama pull llama3.2
 ```
 
