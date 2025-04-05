@@ -15,4 +15,6 @@ duckduckgo-search
 SentencePiece
 pypdf
 datasets
+accelerate>=1.6.0
+
 
