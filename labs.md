@@ -442,32 +442,32 @@ code agent.py
 code -d ../extra/lab8-code.txt agent.py
 ```
 
-5. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent.py file.
+7. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent.py file.
   You can merge each section of code into the agent.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time.
 
 ![Side-by-side merge](./images/gaidd71.png?raw=true "Side-by-side merge") 
 
-6. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
+8. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
 
 ![Merge complete](./images/gaidd72.png?raw=true "Merge complete") 
 
-7. Now you can run your agent with the following command:
+9. Now you can run your agent with the following command:
 
 ```
 python agent.py
 ```
 
-8. At the prompt, you can enter a weather-related query. Start by asking it the same query you gave directly to the model earlier - about the current weather.
+10. At the prompt, you can enter a weather-related query. Start by asking it the same query you gave directly to the model earlier - about the current weather.
 
 ![Running agent](./images/gaidd73.png?raw=true "Running agent") 
    
-9. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final answer from the run.
+11. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final answer from the run.
 
 ![Agent output](./images/gaidd80.png?raw=true "Agent output") 
 
-10. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
+12. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
 
-11. (Optional) If you get done early and want to play around, you can try another current weather query or even asking it a more general weather question. If you don't seem to get a response after the function is called, it may be due to the API limiting. Ctrl-C to cancel the run, wait a moment, and try again.
+(Optional) If you get done early and want to play around, you can try another current weather query or even asking it a more general weather question. If you don't seem to get a response after the function is called, it may be due to the API limiting. Ctrl-C to cancel the run, wait a moment, and try again.
 <p align="center">
 **[END OF LAB]**
 </p>
