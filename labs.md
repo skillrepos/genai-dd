@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 3.1 - 04/06/25
+## Revision 4.0 - 04/06/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -409,25 +409,35 @@ Give me 5 facts about the Mona Lisa
 
 **Purpose: In this lab, we’ll learn about the basics of agents and see how tools are called.**
 
-1. Run ollama llama3.2 and enter in weather query - see that it does not give current info. 
+1. Let's start out by looking at a limitation of LLMs - answering questions about current situations. Using the command below, run llama3.2 directly from ollama.  When it starts, you'll be at a prompt as shown in the screenshot below.
 ```
 ollama run llama3.2
 ```
 
-2. Enter prompt
+![Running model directly](./images/gaidd68.png?raw=true "Running model directly") 
+
+2. Enter a prompt like the one shown below to ask the model for the current weather in a location. You can pick whatever city and state or country you want.
 
 ```
-What is the current weather in <city>,<country or state>?
+What is the current weather in <city>, <country or state>?
 ```
 
-2. For this lab, we have the outline of an agent in a file called *agent.py* in that directory. You can take a look at the code either by clicking on [**genai/agent.py**](./genai/agent.py) or by entering the command below in the codespace's terminal.
+3. Notice that the model doesn't have real-time access to current weather information. So instead, it tries to be helpful about ways to find that information out. When done interacting with the model, use *Ctrl+D* to stop the interactive mode.
+
+![No current info](./images/gaidd69.png?raw=true "No current info") 
+
+4. Let's create a simple agent to help with this task. For this lab, we have the outline of an agent in a file called *agent.py* in the *genai* directory. You can take a look at the code either by clicking on [**genai/agent.py**](./genai/agent.py) or by entering the command below in the codespace's terminal.
+   
 ```
 code agent.py
 ```
 
-3. As you can see, this outlines the steps the agent will go through without all the code. When you are done looking at it, close the file by clicking on the "X" in the tab at the top of the file.
+![Starting agent](./images/gaidd70.png?raw=true "Starting agent") 
 
-4. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
+5. As you can see, this outlines the steps the agent will go through without all the code. When you are done looking at it, close the file by clicking on the "X" in the tab at the top of the file.
+
+6. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
+   
 ```
 code -d ../extra/lab8-code.txt agent.py
 ```
@@ -435,11 +445,11 @@ code -d ../extra/lab8-code.txt agent.py
 5. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent.py file.
   You can merge each section of code into the agent.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time.
 
-![Side-by-side merge](./images/aa5.png?raw=true "Side-by-side merge") 
+![Side-by-side merge](./images/gaidd71.png?raw=true "Side-by-side merge") 
 
 6. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
 
-![Merge complete](./images/aa6.png?raw=true "Merge complete") 
+![Merge complete](./images/gaidd72.png?raw=true "Merge complete") 
 
 7. Now you can run your agent with the following command:
 
@@ -447,15 +457,17 @@ code -d ../extra/lab8-code.txt agent.py
 python agent.py
 ```
 
-8. At the prompt, you can enter a weather-related query. Try asking for the current weather in <city><state or country>.
+8. At the prompt, you can enter a weather-related query. Start by asking it the same query you gave directly to the model earlier - about the current weather.
+
+![Running agent](./images/gaidd73.png?raw=true "Running agent") 
    
-8. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final output from the run.
+9. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final answer from the run.
 
-![Merge complete](./images/aa7.png?raw=true "Merge complete") 
+![Agent output](./images/gaidd74.png?raw=true "Agent output") 
 
-9. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
+10. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
 
-10. (Optional) If you get done early and want to play around, you can try changing the user query. If you don't seem to get a response after the function is called, it may be due to the API limiting. Ctrl-C to cancel the run and try again.
+11. (Optional) If you get done early and want to play around, you can try another current weather query or even asking it a more general weather question. If you don't seem to get a response after the function is called, it may be due to the API limiting. Ctrl-C to cancel the run, wait a moment, and try again.
 <p align="center">
 **[END OF LAB]**
 </p>
