@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 4.0 - 04/06/25
+## Revision 4.1 - 04/06/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -463,7 +463,7 @@ python agent.py
    
 9. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final answer from the run.
 
-![Agent output](./images/gaidd74.png?raw=true "Agent output") 
+![Agent output](./images/gaidd80.png?raw=true "Agent output") 
 
 10. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
 
