@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 3.0 - 01/07/25
+## Revision 3.1 - 04/06/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -237,6 +237,9 @@ cat ../scripts/startOllama.sh
 ```
 ../scripts/startOllama.sh &
 ```
+
+The '&' at the end will causes the script to run in the background. You will see a set of startup messages. After those, you can just hit *Enter* to get back to a prompt in the terminal.
+
 ![starting ollama](./images/gaidd44.png?raw=true "starting ollama")
 
 3. Now let's find a model to use.
