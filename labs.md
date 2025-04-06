@@ -405,147 +405,61 @@ Give me 5 facts about the Mona Lisa
 </p>
 </br></br>
 
-**Lab 8 - Working with Agents and Agentic RAG**
+**Lab 8 - Creating a simple agent**
 
-**Purpose: In this lab, we’ll see how to setup an agent using RAG with a tool.**
+**Purpose: In this lab, we’ll learn about the basics of agents and see how tools are called.**
 
-1. In this lab, we'll download a medical dataset, parse it into a vector database, and create an agent with a tool to help us get answers. First,let's take a look at a dataset of information we'll be using for our RAG context. We'll be using a medical Q&A dataset called [**keivalya/MedQuad-MedicalQnADataset**](https://huggingface.co/datasets/keivalya/MedQuad-MedicalQnADataset). You can go to the page for it on HuggingFace.co and view some of it's data or explore it a bit if you want. To get there, either click on the link above in this step or go to HuggingFace.co and search for "keivalya/MedQuad-MedicalQnADataset" and follow the links.
+1. Run ollama llama3.2 and enter in weather query - see that it does not give current info. 
+```
+ollama run llama3.2
+```
+
+2. Enter prompt
+
+```
+What is the current weather in <city>,<country or state>?
+```
+
+2. For this lab, we have the outline of an agent in a file called *agent.py* in that directory. You can take a look at the code either by clicking on [**genai/agent.py**](./genai/agent.py) or by entering the command below in the codespace's terminal.
+```
+code agent.py
+```
+
+3. As you can see, this outlines the steps the agent will go through without all the code. When you are done looking at it, close the file by clicking on the "X" in the tab at the top of the file.
+
+4. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
+```
+code -d ../extra/lab8-code.txt agent.py
+```
+
+5. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent.py file.
+  You can merge each section of code into the agent.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time.
+
+![Side-by-side merge](./images/aa5.png?raw=true "Side-by-side merge") 
+
+6. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
+
+![Merge complete](./images/aa6.png?raw=true "Merge complete") 
+
+7. Now you can run your agent with the following command:
+
+```
+python agent.py
+```
+
+8. At the prompt, you can enter a weather-related query. Try asking for the current weather in <city><state or country>.
    
-![dataset on huggingface](./images/gaidd76.png?raw=true "dataset on huggingface")    
+8. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final output from the run.
 
-2. Now, let's create the Python file that will pull the dataset, store it in the vector database and invoke an agent with the tool to use it as RAG. First, create a new file for the project.
-```
-code lab8.py
-```
+![Merge complete](./images/aa7.png?raw=true "Merge complete") 
 
-3. Now, add the imports.
-```
-from datasets import load_dataset
-from langchain_community.document_loaders import DataFrameLoader
-from langchain_community.vectorstores import Chroma
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.llms import Ollama 
-from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
-from langchain.prompts import ChatPromptTemplate
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
-from langchain.chains import RetrievalQA
-from langchain.agents import Tool
-from langchain.agents import create_react_agent
-from langchain import hub
-from langchain.agents import AgentExecutor
-```
+9. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
 
-4. Next, we pull and load the dataset.
-   
-```
-data = load_dataset("keivalya/MedQuad-MedicalQnADataset", split='train')
-data = data.to_pandas()
-data = data[0:100]
-df_loader = DataFrameLoader(data, page_content_column="Answer")
-df_document = df_loader.load()
-```
-
-5. Then, we split the text into chunks and load everything into our Chroma vector database.
-```
-from langchain.text_splitter import CharacterTextSplitter
-text_splitter = CharacterTextSplitter(chunk_size=1250,
-                                      separator="\n",
-                                      chunk_overlap=100)
-texts = text_splitter.split_documents(df_document)
-
-# set some config variables for ChromaDB
-CHROMA_DATA_PATH = "vdb_data/"
-embeddings = FastEmbedEmbeddings()  
-
-# embed the chunks as vectors and load them into the database
-db_chroma = Chroma.from_documents(df_document, embeddings, persist_directory=CHROMA_DATA_PATH)
-```
-6. Set up memory for the chat, and choose the LLM.
-```
-conversational_memory = ConversationBufferWindowMemory(
-    memory_key='chat_history',
-    k=4, #Number of messages stored in memory
-    return_messages=True #Must return the messages in the response.
-)
-
-llm = Ollama(model="llama3.2",temperature=0.0)
-```
-
-7. Now, define the mechanism to use for the agent and retrieving data. ("qa" = question and answer) 
-```
-qa = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=db_chroma.as_retriever()
-)
-```
-
-8. Define the tool itself (calling the "qa" function we just defined above as the tool).
-from langchain.agents import Tool
-
-```
-#Defining the list of tool objects to be used by LangChain.
-tools = [
-   Tool(
-       name='Medical KB',
-       func=qa.run,
-       description=(
-           'use this tool when answering medical knowledge queries to get '
-           'more information about the topic'
-       )
-   )
-]
-```
-
-8. Create the agent using the LangChain project *hwchase17/react-chat*.
-```
-prompt = hub.pull("hwchase17/react-chat")
-agent = create_react_agent(
-   tools=tools,
-   llm=llm,
-   prompt=prompt,
-)
-
-# Create an agent executor by passing in the agent and tools
-from langchain.agents import AgentExecutor
-agent_executor = AgentExecutor(agent=agent,
-                               tools=tools,
-                               verbose=True,
-                               memory=conversational_memory,
-                               max_iterations=30,
-                               max_execution_time=600,
-                               #early_stopping_method='generate',
-                               handle_parsing_errors=True
-                               )
-```
-
-9. Add the input processing loop.
-```
-while True:
-    query = input("\nQuery: ")
-    if query == "exit":
-        break
-    if query.strip() == "":
-        continue
-    agent_executor.invoke({"input": query})
-```
-10. Now, **save the file** and run the code.
-```
-python lab8.py
-```
-11. You can prompt it with queries related to the info in the dataset, like:
-```
-I have a patient that may have Botulism. How can I confirm the diagnosis?
-```
-12. In our limited environment, this may take up to 10 minutes to return a final answer, but you will be able to see it going through the "reasoning" process and ultimately providing a response using the Medical KB tool.
-
-![response from agent](./images/gaidd77.png?raw=true "Response from agent")    
-
+10. (Optional) If you get done early and want to play around, you can try changing the user query. If you don't seem to get a response after the function is called, it may be due to the API limiting. Ctrl-C to cancel the run and try again.
 <p align="center">
 **[END OF LAB]**
 </p>
 </br></br>
-
 <p align="center">
 **THANKS!**
 </p>
