@@ -19,7 +19,11 @@
         "vscode": {
             "settings": {
                 "python.terminal.activateEnvInCurrentTerminal": true,
-                "python.defaultInterpreterPath": ".venv/bin/python"
+                "python.defaultInterpreterPath": ".venv/bin/python",
+                // Open Markdown files in preview mode by default
+                "workbench.editorAssociations": {
+                    "*.md": "vscode.markdown.preview.editor"
+                }
             }
         }
     },
