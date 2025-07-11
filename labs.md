@@ -303,7 +303,7 @@ code agent.py
 3. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
 
 ```
-code -d extra/lab2-agent.txt agent.py
+code -d extra/lab6-agent.txt agent.py
 ```
 
 4. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent1.py file.
@@ -418,7 +418,7 @@ High revenue branch
 2. We have a starter file for the new agent with rag in [**rag-agent.py**](./rag_agent.py).As before, we'll use the "view differences and merge" technique to learn about the code we'll be working with. The command to run this time is below. There are a number of helper functions in this code that are useful to understand. Take some time to look at each section as you merge them in.
    
 ```
-code -d extra/lab5-agent.txt rag_agent.py
+code -d extra/lab8-agent.txt rag_agent.py
 ```
 
 ![Code for rag agent](./images/31ai28.png?raw=true "Code for rag agent") 
