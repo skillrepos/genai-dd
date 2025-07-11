@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 4.1 - 04/06/25
+## Revision 5.0 - 07/11/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -228,249 +228,255 @@ python sentiment.py
 
 **Purpose: In this lab, we’ll start getting familiar with Ollama, a way to run models locally.**
 
-1. We already have a script that can download and start Ollama and fetch some models we'll need in later labs. Take a look at the commands being done in the *../scripts/startOllama.sh* file. 
+1. We already have a script that can download and start Ollama and fetch some models we'll need in later labs. Take a look at the commands being done in the [**scripts/startOllama.sh**](./scripts/startOllama.sh) file. 
 ```
-cat ../scripts/startOllama.sh
+cat scripts/startOllama.sh
 ```
 
 2. Go ahead and run the script to get Ollama and start it running.
 ```
-../scripts/startOllama.sh &
+scripts/startOllama.sh &
 ```
 
 The '&' at the end will causes the script to run in the background. You will see a set of startup messages. After those, you can just hit *Enter* to get back to a prompt in the terminal.
 
-![starting ollama](./images/gaidd44.png?raw=true "starting ollama")
+![starting ollama](./images/31ai6.png?raw=true "starting ollama")
 
-3. Now let's find a model to use.
-Go to https://ollama.com and in the *Search models* box at the top, enter *llava*.
-![searching for llava](./images/dga39.png?raw=true "searching for llava")
+3. Now let's find a model to use. Go to https://ollama.com and in the *Search models* box at the top, enter *llama*. In the list that pops up, choose the entry for "llama3.2".
 
-4. Click on the first entry to go to the specific page about this model. Scroll down and scan the various information available about this model.
-![reading about llava](./images/dga40a.png?raw=true "reading about llava")
+![searching for llama](./images/31ai7.png?raw=true "searching for llama")
+
+4. This will put you on the specific page about that model. Scroll down and scan the various information available about this model.
+![reading about llama3.2](./images/31ai8.png?raw=true "reading about llama3.2")
 
 5. Switch back to a terminal in your codespace. While it's not necessary to do as a separate step, first pull the model down with ollama. (This will take a few minutes.)
-```
-ollama pull llava
-```
-6. Now you can run it with the command below.
-```
-ollama run llava
-```
-7. Now you can query the model by inputting text at the *>>>Send a message (/? for help)* prompt. Since this is a multimodal model, you can ask it about an image too. Try the following prompt that references a smiley face file in the repo.
-```
-What's in this image?  ../samples/smiley.jpg
-```
-(If you run into an error that the model can't find the image, try using the full path to the file as shown below.)
-```
-What's in this image? /workspaces/genai-dd/samples/smiley.jpg
-```
-![smiley face analysis](./images/gaidd45.png?raw=true "Smiley face analysis")
-
-8. Now, let's try a call with the API. You can stop the current run with a Ctrl-D or switch to another terminal. Then put in the command below (or whatever simple prompt you want). 
-```
-curl http://localhost:11434/api/generate -d '{
-  "model": "llava",
-  "prompt": "What causes wind?",
-  "stream": false
-}'
-```
-
-9. This will take a minute or so to run. You should see a single response object returned. You can try out some other prompts/queries if you want.
-
-![query response](./images/gaidd46.png?raw=true "Query response")
-
-<p align="center">
-**[END OF LAB]**
-</p>
-</br></br>
-
-**Lab 6 - Working with Vector Databases**
-
-**Purpose: In this lab, we’ll learn about how to use vector databases for storing supporting data and doing similarity searches.**
-
-1. In our repository, we have a simple program built around a popular vector database called Chroma. The file name is vectordb.py. Open the file either by clicking on [**genai/vectordb.py**](./genai/vectordb.py) or by entering the command below in the codespace's terminal.
 
 ```
-code vectordb.py
-```
-
-2. For purposes of not having to load a lot of data and documents, we've *seeded* the same data strings in the file that we're loosely referring to as *documents*. These can be seen in the *datadocs* section of the file.
-![data docs](./images/gaidd47.png?raw=true "Data docs")
-
-3. Likewise, we've added the metadata again for categories for the data items. These can be seen in the *categories* section.
-![data categories](./images/gaidd48.png?raw=true "Data categories")
-
-4. Go ahead and run this program using the command shown below. This will take the document strings, create embeddings and vectors for them in the Chroma database section and then wait for us to enter a query.
-```
-python vectordb.py
-```
-![waiting for input](./images/gaidd49.png?raw=true "Waiting for input")
-
-5. You can enter a query here about any topic and the vector database functionality will try to find the most similar matching data that it has. Since we've only given it a set of 10 strings to work from, the results may not be relevant or very good, but represent the best similarity match the system could find based on the query. Go ahead and enter a query. Some sample ones are shown below, but you can choose others if you want. Just remember it will only be able to choose from the data we gave it. The output will show the closest match from the doc strings and also the similarity and category.
-```
-Tell me about food.
-Who is the most famous person?
-How can I learn better?
-```
-![query results](./images/gaidd50.png?raw=true "Query results")
-
-6. After you've entered and run your query, you can add another one or just type *exit* to stop.
-
-7. Now, let's update the number of results that are returned so we can query on multiple topics. In the file *vectordb.py*, change line 70 to say *n_results=3,* instead of *n_results=1,*. Make sure to save your changes afterwards.
-
-![changed number of results](./images/gaidd51.png?raw=true "Changed number of results")
-
-8. Run the program again with *python vectordb.py*. Now you can try more complex queries or try multiple queries (separated by commas). 
-
-![multiple queries](./images/gaidd52.png?raw=true "Multiple queries")
- 
-9. When done querying the data, if you have more time, you can try modifying or adding to the document strings in the file, then save your changes and run the program again with queries more in-line with the data you provided. You can type in "exit" for the query to end the program.
-
-10. In preparation for the next lab, remove the *llava* model and download the *llama3.2* model.
-```
-ollama rm llava
 ollama pull llama3.2
 ```
+![pulling the model](./images/31ai9.png?raw=true "pulling the model")
 
-<p align="center">
-**[END OF LAB]**
-</p>
-</br></br>
-
-**Lab 7 - Working with RAG implemented with vector databases**
-
-**Purpose: In this lab, we’ll build on the use of vector databases to parse a PDF and allow us to include it in context for LLM queries.**
-
-1. In our repository, we have a simple program built for doing basic RAG processing. The file name is rag.py. Open the file either by clicking on [**genai/rag.py**](./genai/rag.py) or by entering the command below in the codespace's terminal.
-
-```
-code rag.py
-```
-
-2. This program reads in a PDF, parses it into chunks, creates embeddings for the chunks and then stores them in a vector database. It then adds the vector database as additional context for the prompt to the LLM. There is an example pdf named *data.pdf* in the *samples* directory. It contains the same random document strings that were in some of the other programs. You can look at it in the GitHub repo if interested. Open up https://github.com/skillrepos/genai-dd/blob/main/samples/data.pdf if interested.
-
-3. You can now run the program and pass in the ../samples/data.pdf file. This will read in the pdf and tokenize it and store it in the vector database. (Note: A different PDF file can be used, but it needs to be one that is primarily just text. The PDF parsing being used here isn't sophisticated enough to handle images, etc.)
-```
-python rag.py ../samples/data.pdf
-```
-![reading in the pdf](./images/gaidd54.png?raw=true "Reading in the PDF")
-
-4. The program will be waiting for a query. Let's ask it for a query about something only in the document. As a suggestion, you can try the one below. (This will take a few minutes to run typically. Also, the response you get may vary from what is shown.)
-```
-What does the document say about art and literature topics?
-```
-5. The response should include only conclusions based off the information in the document.
-![results from the doc](./images/gaidd74.png?raw=true "Results from the doc")
-  
-6. Now, let's ask it a query for some extended information. For example, try the query below. Then hit enter.
-```
-Give me 5 facts about the Mona Lisa
-```
-7. In the data.pdf file, there is one (and only one) fact about the Mona Lisa - an obscure one about no eyebrows. In the output, you will probably see only this fact or you might see this one and others based on this one or noting a lack of other information. 
-
-![5 facts about the Mona Lisa](./images/gaidd75.png?raw=true "5 facts about the Mona Lisa")
-   
-8. The reason the LLM couldn't add any other facts was due to the PROMPT_TEMPLATE we have in the *rag.py* file. Take a look at it starting around line 29. Note how it limits the LLM to only using the context that comes from our doc (line 51).
-
-![prompt template](./images/rag30.png?raw=true "prompt template")
-
-![doc context](./images/rag31.png?raw=true "doc context")
-
-9. To change this so the LLM can use our context and its own training, we need to change the PROMPT_TEMPLATE. Replace the existing PROMPT_TEMPLATE at lines 29-37 with the lines below. Afterwards, your changes should look like the screenshot below.  (If you see a red wavy line after pasting in the new template, you may need to remove some indenting. You can click on the *PROBLEMS* tab in the same row as *TERMINAL* to see the specific issues.)
-```
-    PROMPT_TEMPLATE = """
-    Answer the question: {question} using whatever resources you have.
-    Include any related information from {context} as part of your answer but add additional information from the model.
-    Provide a detailed answer.
-    Don’t justify your answers.
-    """
-```
-![new prompt template](./images/gaidd79.png?raw=true "new prompt template")
-
-10. **Save your changes**. Type "exit" to end the current run and then run the updated code. Enter the same query "Give me 5 facts about the Mona Lisa". This time, the program will run for several minutes and then the LLM should return 5 "real" facts about the Mona Lisa with our information included. Notice the highlighted part of the fourth item in the screenshot below.  (If the answer isn't returned by the time the break is over, you can just leave it running and check back later.)  You may also see info about other items in the doc in the output.
-
-```
-python rag.py ../samples/data.pdf
-```
-</br></br>
-```
-Give me 5 facts about the Mona Lisa
-```
-</br></br>
-![new output](./images/rag33.png?raw=true "new output")
-
-<p align="center">
-**[END OF LAB]**
-</p>
-</br></br>
-
-**Lab 8 - Creating a simple agent**
-
-**Purpose: In this lab, we’ll learn about the basics of agents and see how tools are called.**
-
-1. Let's start out by looking at a limitation of LLMs - answering questions about current situations. Using the command below, run llama3.2 directly from ollama.  When it starts, you'll be at a prompt as shown in the screenshot below.
+6. Once the model is downloaded, run it with the command below.
 ```
 ollama run llama3.2
 ```
 
-![Running model directly](./images/gaidd68.png?raw=true "Running model directly") 
-
-2. Enter a prompt like the one shown below to ask the model for the current weather in a location. You can pick whatever city and state or country you want.
+7. Now you can query the model by inputting text at the *>>>Send a message (/? for help)* prompt.  Let's ask it about what the weather is in Paris. What you'll see is it telling you that it doesn't have access to current weather data and suggesting some ways to gather it yourself.
 
 ```
-What is the current weather in <city>, <country or state>?
+What's the current weather in Paris?
 ```
 
-3. Notice that the model doesn't have real-time access to current weather information. So instead, it tries to be helpful about ways to find that information out. When done interacting with the model, use *Ctrl+D* to stop the interactive mode.
+![answer to weather prompt and response](./images/31ai10.png?raw=true "answer to weather prompt and response")
 
-![No current info](./images/gaidd69.png?raw=true "No current info") 
+8. Now, let's try a call with the API. You can stop the current run with a Ctrl-D or switch to another terminal. Then put in the command below (or whatever simple prompt you want). 
+```
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3.2",
+  "prompt": "What causes weather changes?",
+  "stream": false
+}'
+```
 
-4. Let's create a simple agent to help with this task. For this lab, we have the outline of an agent in a file called *agent.py* in the *genai* directory. You can take a look at the code either by clicking on [**genai/agent.py**](./genai/agent.py) or by entering the command below in the codespace's terminal.
+9. This will take a minute or so to run. You should see a single response object returned with lots of data. But you can make out the text answer if you look for it. You can try out some other prompts/queries if you want.
+
+![query response](./images/31ai11.png?raw=true "Query response")
+
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
+
+**Lab 7 - Creating a simple agent**
+
+**Purpose: In this lab, we’ll learn about the basics of agents and see how tools are called. We'll also see how Chain of Thought prompting works with LLMs and how we can have ReAct agents reason and act.**
+
+1. For this lab, we have the outline of an agent in a file called *agent.py* in that directory. You can take a look at the code either by clicking on [**agent.py**](./agent.py) or by entering the command below in the codespace's terminal.
    
 ```
 code agent.py
 ```
+![starting agent code](./images/31ai12.png?raw=true "Starting agent code")
 
-![Starting agent](./images/gaidd70.png?raw=true "Starting agent") 
+2. As you can see, this outlines the steps the agent will go through without all the code. When you are done looking at it, close the file by clicking on the "X" in the tab at the top of the file.
 
-5. As you can see, this outlines the steps the agent will go through without all the code. When you are done looking at it, close the file by clicking on the "X" in the tab at the top of the file.
+3. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
 
-6. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
-   
 ```
-code -d ../extra/lab8-code.txt agent.py
+code -d extra/lab2-agent.txt agent.py
 ```
 
-7. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent.py file.
-  You can merge each section of code into the agent.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time.
+4. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent1.py file.
+  You can merge each section of code into the agent1.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time.
 
-![Side-by-side merge](./images/gaidd71.png?raw=true "Side-by-side merge") 
+![Side-by-side merge](./images/31ai13.png?raw=true "Side-by-side merge") 
 
-8. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
+5. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
 
-![Merge complete](./images/gaidd72.png?raw=true "Merge complete") 
+![Merge complete](./images/31ai14.png?raw=true "Merge complete") 
 
-9. Now you can run your agent with the following command:
+6. Now you can run your agent with the following command:
 
 ```
 python agent.py
 ```
 
-10. At the prompt, you can enter a weather-related query. Start by asking it the same query you gave directly to the model earlier - about the current weather.
+![Running the agent](./images/31ai15.png?raw=true "Running the agent")
 
-![Running agent](./images/gaidd73.png?raw=true "Running agent") 
-   
-11. You'll see some of the messages from the model loading. Then, eventually, you should see a section showing the call to the function, the return value from the function, and the final answer from the run.
+7. The agent will start running and will prompt for a location (or "exit" to finish). At the prompt, you can type in a location like "Paris, France" or "London" or "Raleigh" and hit *Enter*. You'll see lots of activity while the model is loaded. After that you'll be able to see the Thought -> Action -> Observation loop in practice as each one is listed out. You'll also see the arguments being passed to the tools as they are called. Finally you should see a human-friendly message summarizing the weather forecast.
 
-![Agent output](./images/gaidd80.png?raw=true "Agent output") 
+![Agent run](./images/31ai16.png?raw=true "Agent run") 
 
-12. Notice that the location supplied in the user query was converted into an appropriate latitude and longitude for the tool call by the LLM. Then the output of the tool run was converted to a user-friendly weather report as the final answer.
+8. You can then input another location and run the agent again or exit. Note that if you get a timeout error, the API may be limiting the number of accesses in a short period of time. You can usually just try again and it will work.
 
-(Optional) If you get done early and want to play around, you can try another current weather query or even asking it a more general weather question. If you don't seem to get a response after the function is called, it may be due to the API limiting. Ctrl-C to cancel the run, wait a moment, and try again.
 <p align="center">
 **[END OF LAB]**
 </p>
+</br></br>
+
+
+**Lab 7 - Working with Vector Databases**
+
+**Purpose: In this lab, we’ll learn about how to use vector databases for storing supporting data and doing similarity searches.**
+
+1. For this lab and the next one, we have a data file that we'll be usihg that contains a list of office information and details for a ficticious company. The file is in [**data/offices.pdf**](./data/offices.pdf). You can use the link to open it and take a look at it.
+
+![PDF data file](./images/31ai23.png?raw=true "PDF data file") 
+
+2. In our repository, we have some simple tools built around a popular vector database called Chroma. There are two files which will create a vector db (index) for the *.py files in our repo and another to do the same for the office pdf. You can look at the files either via the usual "code <filename>" method or clicking on [**tools/index_code.py**](./tools/index_code.py) or [**tools/index_pdf.py**](./tools/index_pdf.py).
+
+```
+code tools/index_code.py
+code tools/index_pdf.py
+```
+
+3. Let's create a vector database of our local python files. Run the program to index those as below. You'll see the program loading the embedding model that will turn the code chunks into numeric represenations in the vector database and then it will read and index our *.py files.
+
+```
+python tools/index_code.py
+```
+
+![Running code indexer](./images/31ai24.png?raw=true "Running code indexer")
+
+4. To help us do easy/simple searches against our vector databases, we have another tool at [**tools/search.py**](./tools/search.py). This tool connects to the ChromaDB vector database we create, and, using cosine similarity metrics, finds the top "hits" (matching chunks) and prints them out. You can open it and look at the code in the usual way if you want. No changes are needed to the code.
+
+```
+code tools/search.py
+```
+
+5. Now, let's run the search tool against the vector database we built in step 3. You can prompt it with phrases related to our coding like any of the ones shown below. When done, just type "exit".  Notice the top hits and their respective cosine similarity values. Are they close? Farther apart?
+
+```
+python tools/search.py
+```
+<br>
+```
+convert celsius to farenheit fastmcp tools
+embed model sentence-transformers
+async with Client mcp
+```
+
+![Running search](./images/31ai25.png?raw=true "Running search")
+
+6.  Now, let's recreate our vector database based off of the PDF file. Just run the indexer for the pdf file.
+
+```
+python tools/index_pdf.py
+```
+
+![Indexing PDF](./images/31ai26.png?raw=true "Indexing PDF")
+
+7. Now, we can run the same search tool to find the top hits for information about offices. Below are some prompts you can try here. Note that in some of them, we're using keywords only found in the PDF document. Notice the cosine similarity values on each - are they close? Farther apart?  When done, just type "exit".
+
+```
+python tools/search.py
+
+Queries:
+Corporate Operations office
+Seaside cities
+Tech Development sites
+High revenue branch
+```
+
+![PDF search](./images/31ai27.png?raw=true "PDF search")
+
+8. Keep in mind that this is not trying to intelligently answer your prompts at this point. This is a simple semantic search to find related chunks. In lab 5, we'll add in the LLM to give us better responses. In preparation for that lab, make sure that indexing for the PDF is the last one you ran and not the indexing for the Python files.
+
+
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
+
+    
+**Lab 8 - Using RAG with Agents**
+
+**Purpose: In this lab, we’ll explore how agents can leverage external data stores via RAG and tie in our previous tool use.**
+
+1. For this lab, we're going to combine our previous agent that looks up weather with RAG to get information about offices based on a prompt and tell us what the weather is like for that locaion.
+
+2. We have a starter file for the new agent with rag in [**rag-agent.py**](./rag_agent.py).As before, we'll use the "view differences and merge" technique to learn about the code we'll be working with. The command to run this time is below. There are a number of helper functions in this code that are useful to understand. Take some time to look at each section as you merge them in.
+   
+```
+code -d extra/lab5-agent.txt rag_agent.py
+```
+
+![Code for rag agent](./images/31ai28.png?raw=true "Code for rag agent") 
+
+
+3. When you're done merging, close the tab as usual to save your changes. Now, in a terminal, start the MCP server running again:
+
+```
+python mcp_server.py
+```
+
+4. In a separate terminal, start the new agent running.
+
+```
+python rag_agent.py
+```
+
+5. You'll see a *User:* prompt when it is ready for input from you. The agent is geared around you entering a prompt about an office. Try a prompt like one of the ones below about office "names" that are only in the PDF.
+
+```
+Tell me about HQ
+Tell me about the Southern office
+```
+
+6. What you should see after that are some messages that show internal processing, such as the retrieved items from the RAG datastore.  Then the agent will run through the necessary steps like parsing the query to find a location, getting the coordinates for the location, getting the weather etc. At the end it will print out an answer to your prompt and the weather determined from the tool.
+ 
+![Running the RAG agent](./images/31ai29.png?raw=true "Running the RAG agent") 
+
+7. After the initial run, you can try prompts about other offices or cities mentioned in the PDF. Type *exit* when done.
+
+8. While this works, it could be more informative and user-friendly. Let's change the prompt and directions to the LLM to have it add an additional fact about the city where the office is located and include that and the weather in a more user-friendly response. To see and make the changes you can do the usual diff and merge using the command below.
+
+```
+code -d extra/lab5-agent-2.txt rag_agent.py
+```
+
+![Updating the RAG agent](./images/31ai30.png?raw=true "Updating the RAG agent") 
+
+9. Once you've finished the merge, you can run the new agent code the same way again.
+
+```
+python agent_rag.py
+```
+
+10. Now, you can try the same queries as before and you should get more user-friendly answers.
+
+```
+Tell me about HQ
+Tell me about the Southern office
+```
+
+![Running the updated RAG agent](./images/31ai31.png?raw=true "Running the updated RAG agent") 
+
+<p align="center">
+**[END OF LAB]**
+</p>
+</br></br>
+
 </br></br>
 <p align="center">
 **THANKS!**
