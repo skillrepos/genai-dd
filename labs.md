@@ -287,7 +287,7 @@ curl http://localhost:11434/api/generate -d '{
 </p>
 </br></br>
 
-**Lab 7 - Creating a simple agent**
+**Lab 6 - Creating a simple agent**
 
 **Purpose: In this lab, we’ll learn about the basics of agents and see how tools are called. We'll also see how Chain of Thought prompting works with LLMs and how we can have ReAct agents reason and act.**
 
