@@ -254,7 +254,7 @@ The '&' at the end will causes the script to run in the background. You will see
 ```
 ollama pull llama3.2
 ```
-![pulling the model](./images/31ai9.png?raw=true "pulling the model")
+![pulling the model](./images/gaidd96.png?raw=true "pulling the model")
 
 6. Once the model is downloaded, run it with the command below.
 ```
@@ -395,7 +395,7 @@ Tech Development sites
 High revenue branch
 ```
 
-![PDF search](./images/31ai27.png?raw=true "PDF search")
+![PDF search](./images/gaidd95.png?raw=true "PDF search")
 
 8. Keep in mind that this is not trying to intelligently answer your prompts at this point. This is a simple semantic search to find related chunks. In lab 5, we'll add in the LLM to give us better responses. In preparation for that lab, make sure that indexing for the PDF is the last one you ran and not the indexing for the Python files.
 
@@ -461,7 +461,7 @@ Tell me about HQ
 Tell me about the Southern office
 ```
 
-![Running the updated RAG agent](./images/31ai31.png?raw=true "Running the updated RAG agent") 
+![Running the updated RAG agent](./images/gaidd94.png?raw=true "Running the updated RAG agent") 
 
 <p align="center">
 **[END OF LAB]**
