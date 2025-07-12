@@ -443,18 +443,18 @@ Tell me about the Southern office
 8. While this works, it could be more informative and user-friendly. Let's change the prompt and directions to the LLM to have it add an additional fact about the city where the office is located and include that and the weather in a more user-friendly response. To see and make the changes you can do the usual diff and merge using the command below.
 
 ```
-code -d extra/lab5-agent-2.txt rag_agent.py
+code -d ../extra/lab8-agent-2.txt rag_agent.py
 ```
 
-![Updating the RAG agent](./images/31ai30.png?raw=true "Updating the RAG agent") 
+![Updating the RAG agent](./images/gaidd93.png?raw=true "Updating the RAG agent") 
 
 9. Once you've finished the merge, you can run the new agent code the same way again.
 
 ```
-python agent_rag.py
+python rag_agent.py
 ```
 
-10. Now, you can try the same queries as before and you should get more user-friendly answers.
+10. Now, you can try the same queries as before and you should get more user-friendly answers, based off primarily our changes to the prompt.
 
 ```
 Tell me about HQ
