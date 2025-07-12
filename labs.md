@@ -230,17 +230,17 @@ python sentiment.py
 
 1. We already have a script that can download and start Ollama and fetch some models we'll need in later labs. Take a look at the commands being done in the [**scripts/startOllama.sh**](./scripts/startOllama.sh) file. 
 ```
-cat scripts/startOllama.sh
+cat ../scripts/startOllama.sh
 ```
 
 2. Go ahead and run the script to get Ollama and start it running.
 ```
-scripts/startOllama.sh &
+../scripts/startOllama.sh &
 ```
 
 The '&' at the end will causes the script to run in the background. You will see a set of startup messages. After those, you can just hit *Enter* to get back to a prompt in the terminal.
 
-![starting ollama](./images/31ai6.png?raw=true "starting ollama")
+![starting ollama](./images/gaidd81.png?raw=true "starting ollama")
 
 3. Now let's find a model to use. Go to https://ollama.com and in the *Search models* box at the top, enter *llama*. In the list that pops up, choose the entry for "llama3.2".
 
@@ -261,7 +261,7 @@ ollama pull llama3.2
 ollama run llama3.2
 ```
 
-7. Now you can query the model by inputting text at the *>>>Send a message (/? for help)* prompt.  Let's ask it about what the weather is in Paris. What you'll see is it telling you that it doesn't have access to current weather data and suggesting some ways to gather it yourself.
+7. This will take several minutes to start. Once it does, you can query the model by inputting text at the *>>>Send a message (/? for help)* prompt.  Let's ask it about what the weather is in Paris. What you'll see is it telling you that it doesn't have access to current weather data and suggesting some ways to gather it yourself.
 
 ```
 What's the current weather in Paris?
@@ -280,7 +280,7 @@ curl http://localhost:11434/api/generate -d '{
 
 9. This will take a minute or so to run. You should see a single response object returned with lots of data. But you can make out the text answer if you look for it. You can try out some other prompts/queries if you want.
 
-![query response](./images/31ai11.png?raw=true "Query response")
+![query response](./images/gaidd83.png?raw=true "Query response")
 
 <p align="center">
 **[END OF LAB]**
@@ -296,7 +296,7 @@ curl http://localhost:11434/api/generate -d '{
 ```
 code agent.py
 ```
-![starting agent code](./images/31ai12.png?raw=true "Starting agent code")
+![starting agent code](./images/gaidd84.png?raw=true "Starting agent code")
 
 2. As you can see, this outlines the steps the agent will go through without all the code. When you are done looking at it, close the file by clicking on the "X" in the tab at the top of the file.
 
@@ -307,13 +307,13 @@ code -d extra/lab6-agent.txt agent.py
 ```
 
 4. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent1.py file.
-  You can merge each section of code into the agent1.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time.
+  You can merge each section of code into the agent1.py file by hovering over the middle bar and clicking on the arrows pointing right. Go through each section, look at the code, and then click to merge the changes in, one at a time. Make sure to merge all the changes.
 
-![Side-by-side merge](./images/31ai13.png?raw=true "Side-by-side merge") 
+![Side-by-side merge](./images/gaidd85.png?raw=true "Side-by-side merge") 
 
 5. When you have finished merging all the sections in, the files should show no differences. Save the changes simply by clicking on the "X" in the tab name.
 
-![Merge complete](./images/31ai14.png?raw=true "Merge complete") 
+![Merge complete](./images/gaidd86.png?raw=true "Merge complete") 
 
 6. Now you can run your agent with the following command:
 
@@ -321,11 +321,9 @@ code -d extra/lab6-agent.txt agent.py
 python agent.py
 ```
 
-![Running the agent](./images/31ai15.png?raw=true "Running the agent")
-
 7. The agent will start running and will prompt for a location (or "exit" to finish). At the prompt, you can type in a location like "Paris, France" or "London" or "Raleigh" and hit *Enter*. You'll see lots of activity while the model is loaded. After that you'll be able to see the Thought -> Action -> Observation loop in practice as each one is listed out. You'll also see the arguments being passed to the tools as they are called. Finally you should see a human-friendly message summarizing the weather forecast.
 
-![Agent run](./images/31ai16.png?raw=true "Agent run") 
+![Agent run](./images/gaidd87.png?raw=true "Agent run") 
 
 8. You can then input another location and run the agent again or exit. Note that if you get a timeout error, the API may be limiting the number of accesses in a short period of time. You can usually just try again and it will work.
 
