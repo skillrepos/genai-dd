@@ -8,13 +8,11 @@ torch>=2.3.0
 torchvision>=0.18.0
 transformers>=4.40.2
 chromadb>=0.4.24
-sentence_transformers
+sentence_transformers>=5.0.0
 langchain_community>=0.2.6
 fastembed>=0.3.2
-duckduckgo-search
-SentencePiece
-pypdf
-datasets
+sentencepiece>=0.2.0
+pypdf>=5.7.0
 accelerate>=1.6.0
-
+langchain-ollama>=0.3.4
 
