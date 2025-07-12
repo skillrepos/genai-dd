@@ -33,11 +33,12 @@ from sentence_transformers import SentenceTransformer
 # ╔══════════════════════════════════════════════════════════════════╗
 # 1.  Config / constants                                             ║
 # ╚══════════════════════════════════════════════════════════════════╝
-CHROMA_PATH      = Path("./chroma_db")
-COLLECTION_NAME  = "codebase"
-EMBED_MODEL_NAME = "all-MiniLM-L6-v2"
-TOP_K            = 5
+CHROMA_PATH      = Path("./chroma_db")          # where the vector DB lives
+COLLECTION_NAME  = "codebase"                   # collection inside Chroma
+EMBED_MODEL_NAME = "all-MiniLM-L6-v2"           # SBERT model for queries
+TOP_K            = 5                            # RAG: retrieve top-5 chunks
 
+# Regex patterns for lat/lon and various city formats
 COORD_RE        = re.compile(r"\b(-?\d{1,2}(?:\.\d+)?)[,\s]+(-?\d{1,3}(?:\.\d+)?)\b")
 CITY_STATE_RE   = re.compile(r"\b([A-Z][a-z]+(?: [A-Z][a-z]+)*),\s*([A-Z]{2})\b")
 CITY_COUNTRY_RE = re.compile(r"\b([A-Z][a-z]+(?: [A-Z][a-z]+)*),\s*([A-Z][a-z]{2,})\b")
@@ -81,6 +82,7 @@ WEATHER_CODE_MAP = {
 # 2.  Vector search helpers                                          ║
 # ╚══════════════════════════════════════════════════════════════════╝
 def open_collection() -> chromadb.Collection:
+    """Return (or create) the Chroma collection."""
     client = chromadb.PersistentClient(
         path=str(CHROMA_PATH),
         settings=Settings(),
@@ -105,6 +107,7 @@ def rag_search(query: str,
 # 3.  Information-extraction helpers                                 ║
 # ╚══════════════════════════════════════════════════════════════════╝
 def find_coords(texts: List[str]) -> Optional[Tuple[float, float]]:
+    """First valid lat/lon in the supplied texts, else None."""
     for txt in texts:
         for m in COORD_RE.finditer(txt):
             lat, lon = map(float, m.groups())
@@ -114,6 +117,7 @@ def find_coords(texts: List[str]) -> Optional[Tuple[float, float]]:
 
 
 def find_city_state(texts: List[str]) -> Optional[str]:
+    """Return first “City, ST” (US/CA style) found."""
     for txt in texts:
         if (m := CITY_STATE_RE.search(txt)):
             return m.group(0)
@@ -121,6 +125,7 @@ def find_city_state(texts: List[str]) -> Optional[str]:
 
 
 def find_city_country(texts: List[str]) -> Optional[str]:
+    """Return first “City, Country” found."""
     for txt in texts:
         if (m := CITY_COUNTRY_RE.search(txt)):
             return m.group(0)
@@ -128,6 +133,9 @@ def find_city_country(texts: List[str]) -> Optional[str]:
 
 
 def guess_city(texts: List[str]) -> Optional[str]:
+    """
+    Fallback: first capitalised token not in STOPWORDS and >2 chars.
+    """
     for txt in texts:
         for m in CITY_RE.finditer(txt):
             token = m.group(1).strip()
@@ -137,6 +145,10 @@ def guess_city(texts: List[str]) -> Optional[str]:
 
 
 def geocode(name: str) -> Optional[Tuple[float, float]]:
+    """
+    Ask Open-Meteo’s geocoding API for coords.
+    If “City, XX” fails, retry with just “City”.
+    """
     url = "https://geocoding-api.open-meteo.com/v1/search"
 
     def _lookup(n: str):
@@ -154,7 +166,7 @@ def geocode(name: str) -> Optional[Tuple[float, float]]:
     coords = _lookup(name)
     if coords:
         return coords
-    if "," in name:
+    if "," in name:                              # retry with simpler string
         return _lookup(name.split(",", 1)[0].strip())
     return None
 
@@ -195,6 +207,17 @@ def convert_c_to_f(c: float) -> float:
 # 5.  Main workflow (async)                                          ║
 # ╚══════════════════════════════════════════════════════════════════╝
 async def run(prompt: str) -> None:
+    """
+    0. User prompt ➜ vector search ➜ possible office chunk.
+    1. Extract coordinates *or* city name.
+    2. If only a city, geocode to lat/lon.
+    3. Call MCP tools: get_weather → convert_c_to_f.
+    4. Print final weather.
+    """
+
+    # Vector search
+
+
     embed_model = SentenceTransformer(EMBED_MODEL_NAME)
     coll        = open_collection()
 
@@ -203,8 +226,10 @@ async def run(prompt: str) -> None:
     if top_hit:
         print("\nTop RAG hit:\n", top_hit, "\n")
 
+    # — step 1: direct coordinates? —
     coords = find_coords([top_hit, prompt])
 
+    # — step 2: if no coords, derive city then geocode —
     if not coords:
         city_str = (
             find_city_state([top_hit, prompt])
@@ -222,11 +247,13 @@ async def run(prompt: str) -> None:
     lat, lon = coords
     print(f"Using coordinates: {lat:.4f}, {lon:.4f}\n")
 
+    # — step 3: call tools —
     weather = get_weather(lat, lon)
     if not weather:
         print("Failed to retrieve weather.")
         return
 
+    # — step 4: print result —
     temp_c = weather.get("temperature")
     cond   = weather.get("conditions", "Unknown")
     temp_f = convert_c_to_f(temp_c)
