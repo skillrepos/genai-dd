@@ -24,7 +24,11 @@
                 "workbench.editorAssociations": {
                     "*.md": "vscode.markdown.preview.editor"
                 }
-            }
+            },
+            "extensions": [
+               "mathematic.vscode-pdf",
+               "vstirbu.vscode-mermaid-preview"
+            ]
         }
     },
     "postCreateCommand": "bash -i scripts/pysetup.sh py_env"
