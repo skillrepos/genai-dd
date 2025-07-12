@@ -9,7 +9,7 @@ Pipeline
 
 Dependencies
 ------------
-    pip install sentence-transformers chromadb fastmcp requests tiktoken
+    pip install sentence-transformers chromadb requests
 """
 
 # ────────────────────────── standard libs ───────────────────────────
@@ -24,17 +24,10 @@ import requests
 import chromadb
 from chromadb.config import Settings, DEFAULT_TENANT, DEFAULT_DATABASE
 from sentence_transformers import SentenceTransformer
-from fastmcp import Client
-from fastmcp.exceptions import ToolError
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # 1.  Config / constants                                             ║
 # ╚══════════════════════════════════════════════════════════════════╝
-CHROMA_PATH      = Path("./chroma_db")          # where the vector DB lives
-COLLECTION_NAME  = "codebase"                   # collection inside Chroma
-EMBED_MODEL_NAME = "all-MiniLM-L6-v2"           # SBERT model for queries
-MCP_ENDPOINT     = "http://127.0.0.1:8000/mcp/" # FastMCP server
-TOP_K            = 5                            # RAG: retrieve top-5 chunks
 
 # Regex patterns for lat/lon and various city formats
 COORD_RE        = re.compile(r"\b(-?\d{1,2}(?:\.\d+)?)[,\s]+(-?\d{1,3}(?:\.\d+)?)\b")
@@ -42,7 +35,39 @@ CITY_STATE_RE   = re.compile(r"\b([A-Z][a-z]+(?: [A-Z][a-z]+)*),\s*([A-Z]{2})\b"
 CITY_COUNTRY_RE = re.compile(r"\b([A-Z][a-z]+(?: [A-Z][a-z]+)*),\s*([A-Z][a-z]{2,})\b")
 CITY_RE         = re.compile(r"\b([A-Z][a-z]+(?: [A-Z][a-z]+)*)\b")
 
-STOPWORDS = {"office", "hq", "center", "centre"}  # ignore tokens like “HQ”
+STOPWORDS = {"office", "hq", "center", "centre"}
+
+# Open-Meteo weather code mapping
+WEATHER_CODE_MAP = {
+    0:  "Clear sky",
+    1:  "Mainly clear",
+    2:  "Partly cloudy",
+    3:  "Overcast",
+    45: "Fog",
+    48: "Depositing rime fog",
+    51: "Light drizzle",
+    53: "Moderate drizzle",
+    55: "Dense drizzle",
+    56: "Light freezing drizzle",
+    57: "Dense freezing drizzle",
+    61: "Slight rain",
+    63: "Moderate rain",
+    65: "Heavy rain",
+    66: "Light freezing rain",
+    67: "Heavy freezing rain",
+    71: "Slight snow fall",
+    73: "Moderate snow fall",
+    75: "Heavy snow fall",
+    77: "Snow grains",
+    80: "Slight rain showers",
+    81: "Moderate rain showers",
+    82: "Violent rain showers",
+    85: "Slight snow showers",
+    86: "Heavy snow showers",
+    95: "Thunderstorm",
+    96: "Thunderstorm with slight hail",
+    99: "Thunderstorm with heavy hail"
+}
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # 2.  Vector search helpers                                          ║
@@ -130,24 +155,8 @@ def geocode(name: str) -> Optional[Tuple[float, float]]:
     return None
 
 # ╔══════════════════════════════════════════════════════════════════╗
-# 4.  unwrap(): CallToolResult → plain Python                        ║
+# 4.  Weather & Conversion tools                                     ║
 # ╚══════════════════════════════════════════════════════════════════╝
-def unwrap(obj):
-    """
-    FastMCP returns a CallToolResult wrapper.  This helper converts *any*
-    shape used across FastMCP versions into plain dict / number / string.
-    """
-    if hasattr(obj, "structured_content") and obj.structured_content:
-        return unwrap(obj.structured_content)
-    if hasattr(obj, "data") and obj.data:
-        return unwrap(obj.data)
-    if isinstance(obj, list) and len(obj) == 1:
-        return unwrap(obj[0])              # unwrap single-element list
-    if isinstance(obj, dict):
-        numeric_vals = [v for v in obj.values() if isinstance(v, (int, float))]
-        if len(numeric_vals) == 1:         # {'value': 78.8}
-            return numeric_vals[0]
-    return obj
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # 5.  Main workflow (async)                                          ║
@@ -184,14 +193,8 @@ async def run(prompt: str) -> None:
     lat, lon = coords
     print(f"Using coordinates: {lat:.4f}, {lon:.4f}\n")
 
-    # — step 3: call MCP tools —
-
-        try:
-            tf_raw = await mcp.call_tool("convert_c_to_f", {"c": temp_c})
-            temp_f = float(unwrap(tf_raw))
-        except (ToolError, ValueError) as e:
-            print(f"Temperature conversion failed: {e}")
-            return
+    # — step 3: call tools —
+        return
 
     # — step 4: print result —
     print(f"Weather: {cond}, {temp_f:.1f} °F\n")
