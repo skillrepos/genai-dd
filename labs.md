@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 5.3 - 07/12/25
+## Revision 5.4 - 07/12/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -348,7 +348,7 @@ code ../tools/index_code.py
 code ../tools/index_pdf.py
 ```
 
-3. Let's create a vector database of our local python files. Run the program to index those. You'll see the program loading the embedding model that will turn the code chunks into numeric represenations in the vector database and then it will read and index our *.py files. It will create a new local vector database in *./chroma_db*.
+3. Let's create a vector database of our local python files. Run the program to index those. **This may run for a while before you see things happening.** You'll see the program loading the embedding model that will turn the code chunks into numeric represenations in the vector database and then it will read and index our *.py files. It will create a new local vector database in *./chroma_db*.
 
 ```
 python ../tools/index_code.py
