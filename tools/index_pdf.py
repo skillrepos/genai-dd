@@ -38,7 +38,7 @@ from chromadb.config import Settings, DEFAULT_TENANT, DEFAULT_DATABASE
 # ╔════════════════════════════════════════════════════════════════╗
 # 1.  Configuration / constants                                    ║
 # ╚════════════════════════════════════════════════════════════════╝
-PDF_DIR          = Path("./data")              # where to look for *.pdf
+PDF_DIR          = Path("../data")              # where to look for *.pdf
 EMBED_MODEL_NAME = "all-MiniLM-L6-v2"          # SBERT model on HF Hub
 CHROMA_PATH      = Path("./chroma_db")         # output folder (wiped each run)
 COLLECTION_NAME  = "codebase"                  # logical collection inside DB
