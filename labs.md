@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 5.2 - 07/12/25
+## Revision 5.3 - 07/12/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -303,7 +303,7 @@ code agent.py
 3. Now, let's fill in the code. To keep things simple and avoid formatting/typing frustration, we already have the code in another file that we can merge into this one. Run the command below in the terminal.
 
 ```
-code -d extra/lab6-agent.txt agent.py
+code -d ../extra/lab6-agent.txt agent.py
 ```
 
 4. Once you have run the command, you'll have a side-by-side in your editor of the completed code and the agent1.py file.
