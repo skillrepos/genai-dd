@@ -1,7 +1,7 @@
 # Generative AI for Developers Deep Dive
 ## Understanding key Gen AI concepts - full-day workshop
 ## Session labs 
-## Revision 5.4 - 07/12/25
+## Revision 5.5 - 07/12/25
 
 **Follow the startup instructions in the README.md file IF NOT ALREADY DONE!**
 
@@ -366,9 +366,7 @@ code ../tools/search.py
 
 ```
 python ../tools/search.py
-```
-<br>
-```
+
 convert celsius to farenheit
 embed model sentence-transformers
 ```
