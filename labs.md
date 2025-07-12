@@ -344,50 +344,49 @@ python agent.py
 2. In our repository, we have some simple tools built around a popular vector database called Chroma. There are two files which will create a vector db (index) for the *.py files in our repo and another to do the same for the office pdf. You can look at the files either via the usual "code <filename>" method or clicking on [**tools/index_code.py**](./tools/index_code.py) or [**tools/index_pdf.py**](./tools/index_pdf.py).
 
 ```
-code tools/index_code.py
-code tools/index_pdf.py
+code ../tools/index_code.py
+code ../tools/index_pdf.py
 ```
 
-3. Let's create a vector database of our local python files. Run the program to index those as below. You'll see the program loading the embedding model that will turn the code chunks into numeric represenations in the vector database and then it will read and index our *.py files.
+3. Let's create a vector database of our local python files. Run the program to index those. You'll see the program loading the embedding model that will turn the code chunks into numeric represenations in the vector database and then it will read and index our *.py files. It will create a new local vector database in *./chroma_db*.
 
 ```
-python tools/index_code.py
+python ../tools/index_code.py
 ```
 
-![Running code indexer](./images/31ai24.png?raw=true "Running code indexer")
+![Running code indexer](./images/gaidd88.png?raw=true "Running code indexer")
 
 4. To help us do easy/simple searches against our vector databases, we have another tool at [**tools/search.py**](./tools/search.py). This tool connects to the ChromaDB vector database we create, and, using cosine similarity metrics, finds the top "hits" (matching chunks) and prints them out. You can open it and look at the code in the usual way if you want. No changes are needed to the code.
 
 ```
-code tools/search.py
+code ../tools/search.py
 ```
 
 5. Now, let's run the search tool against the vector database we built in step 3. You can prompt it with phrases related to our coding like any of the ones shown below. When done, just type "exit".  Notice the top hits and their respective cosine similarity values. Are they close? Farther apart?
 
 ```
-python tools/search.py
+python ../tools/search.py
 ```
 <br>
 ```
-convert celsius to farenheit fastmcp tools
+convert celsius to farenheit
 embed model sentence-transformers
-async with Client mcp
 ```
 
-![Running search](./images/31ai25.png?raw=true "Running search")
+![Running search](./images/gaidd89.png?raw=true "Running search")
 
 6.  Now, let's recreate our vector database based off of the PDF file. Just run the indexer for the pdf file.
 
 ```
-python tools/index_pdf.py
+python ../tools/index_pdf.py
 ```
 
-![Indexing PDF](./images/31ai26.png?raw=true "Indexing PDF")
+![Indexing PDF](./images/gaidd90.png?raw=true "Indexing PDF")
 
 7. Now, we can run the same search tool to find the top hits for information about offices. Below are some prompts you can try here. Note that in some of them, we're using keywords only found in the PDF document. Notice the cosine similarity values on each - are they close? Farther apart?  When done, just type "exit".
 
 ```
-python tools/search.py
+python ../tools/search.py
 
 Queries:
 Corporate Operations office
