@@ -58,17 +58,59 @@ WEATHER_CODES: Dict[int, str] = {
 # ║ 2.  “Tool” functions (simple Python, no server needed)           ║
 # ╚══════════════════════════════════════════════════════════════════╝
 def get_weather(lat: float, lon: float) -> dict:
+    """
+    Query the **daily** endpoint of Open-Meteo and return *today’s*
+    max / min temperature and the weather-code description.
+
+    Returned dict always has the same keys so the LLM can rely on them.
+    """
+    url = (
+        "https://api.open-meteo.com/v1/forecast"
+        f"?latitude={lat}&longitude={lon}"
+        "&daily=weathercode,temperature_2m_max,temperature_2m_min"
+        "&forecast_days=1&timezone=auto"
+    )
+    r = requests.get(url, timeout=15)
+    r.raise_for_status()                       # raise for any 4xx / 5xx
+    daily = r.json()["daily"]
+
+    return {
+        "high":       daily["temperature_2m_max"][0],
+        "low":        daily["temperature_2m_min"][0],
+        "conditions": WEATHER_CODES.get(daily["weathercode"][0], "Unknown"),
+    }
 
 
 def convert_c_to_f(c: float) -> float:
+    """Classic °C → °F conversion."""
+    return c * 9 / 5 + 32
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║ 3.  Local LLM wrapper (LangChain + Ollama)                       ║
-# ╚══════════════════════════════════════════════════════════════════╝)
+# ╚══════════════════════════════════════════════════════════════════╝
+# The model is fetched from your local Ollama instance; set temperature
+# to 0.0 for deterministic planning.
+llm = ChatOllama(model="llama3.2", temperature=0.0)
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║ 4.  “System” prompt that defines the tools and the TAO protocol  ║
 # ╚══════════════════════════════════════════════════════════════════╝
+SYSTEM = textwrap.dedent("""
+You are an agent with two tools:
+
+get_weather(lat:float, lon:float)
+    → {"high": float, "low": float, "conditions": str}
+
+convert_c_to_f(c:float) → float
+
+When you plan, emit exactly:
+
+Thought: <your thought>
+Action: <tool name>
+Args: {"lat":X,"lon":Y}   or   {"c":Z}
+
+Do NOT output anything else.
+""").strip()
 
 # ╔══════════════════════════════════════════════════════════════════╗
 # ║ 5.  Helper that runs a single TAO episode and prints the trace   ║
@@ -84,18 +126,39 @@ def run(question: str) -> str:
            return the final sentence so the caller could display it.
     """
     # Initial conversation history
+    messages = [
+        {"role": "system", "content": SYSTEM},
+        {"role": "user",   "content": question},
+    ]
 
+    print("\n--- Thought → Action → Observation → Final ---\n")
 
     # ── First planning step: choose coordinates ────────────────────
+    reply1 = llm.invoke(messages)
+    plan1  = reply1.content.strip()
+    print(plan1 + "\n")
 
     # Extract JSON args from the “Args: …” line
     coords = json.loads(plan1.split("Args:")[1].strip())
 
     # Call the first tool and show observation
+    obs1 = get_weather(**coords)
+    print(f"Observation: {obs1}\n")
 
     # ── Second planning step: decide whether to convert units ──────
+    messages += [
+        {"role": "assistant", "content": plan1},          # what the LLM “said”
+        {"role": "user",      "content": f"Observation: {obs1}"},
+    ]
+    reply2 = llm.invoke(messages)
+    plan2  = reply2.content.strip()
+    print(plan2 + "\n")
 
     # In this toy protocol the second tool call is always °C→°F
+    high_f = convert_c_to_f(obs1["high"])
+    low_f  = convert_c_to_f(obs1["low"])
+    obs2   = {"high_f": high_f, "low_f": low_f}
+    print(f"Observation: {obs2}\n")
 
     # ── Compose the final human-readable answer ────────────────────
     final = (
