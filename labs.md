@@ -291,7 +291,7 @@ curl http://localhost:11434/api/generate -d '{
 
 **Purpose: In this lab, we’ll learn about the basics of agents and see how tools are called. We'll also see how Chain of Thought prompting works with LLMs and how we can have ReAct agents reason and act.**
 
-1. For this lab, we have the outline of an agent in a file called *agent.py* in the *genai* directory. You can take a look at the code either by clicking on [**agent.py**](./agent.py) or by entering the command below in the codespace's terminal.
+1. For this lab, we have the outline of an agent in a file called *agent.py* in the *genai* directory. You can take a look at the code either by clicking on [**agent.py**](./agent.py) or by entering the command below in the codespace's terminal. This agent takes a location as input and calls a free weather api to get weather conditions at the location and print them out.
    
 ```
 code agent.py
@@ -337,7 +337,7 @@ python agent.py
 
 **Purpose: In this lab, we’ll learn about how to use vector databases for storing supporting data and doing similarity searches.**
 
-1. For this lab and the next one, we have a data file that we'll be usihg that contains a list of office information and details for a ficticious company. The file is in [**data/offices.pdf**](./data/offices.pdf). You can use the link to open it and take a look at it.
+1. For this lab and the next one, we have a data file that we'll be using that contains a list of office information and details for a ficticious company. The file is in [**data/offices.pdf**](./data/offices.pdf). You can use the link to open it and take a look at it.
 
 ![PDF data file](./images/31ai23.png?raw=true "PDF data file") 
 
