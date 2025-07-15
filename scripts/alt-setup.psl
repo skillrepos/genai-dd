@@ -1,0 +1,44 @@
+# setup.ps1 - Environment setup for genai-dd (PowerShell version)
+
+Write-Host "🛠️  Setting up environment..."
+
+# 1. Check for Python
+if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
+    Write-Error "Python is not installed or not on PATH. Please install Python 3."
+    exit 1
+}
+
+# 2. Create virtual environment
+Write-Host "`n[1/6] Creating virtual environment..."
+python -m venv .venv
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Failed to create virtual environment."
+    exit 1
+}
+
+# 3. Activate virtual environment
+Write-Host "`n[2/6] Activating virtual environment..."
+& .\.venv\Scripts\Activate.ps1
+
+# 4. Upgrade pip
+Write-Host "`n[3/6] Upgrading pip..."
+pip install --upgrade pip
+
+# 5. Remove 'torch' line and install other requirements
+Write-Host "`n[4/6] Installing requirements (excluding torch)..."
+$requirements = Get-Content requirements\requirements.txt | Where-Object { $_ -notmatch "^torch" }
+$requirements | Set-Content tmp_requirements.txt
+pip install -r tmp_requirements.txt
+
+# 6. Pin numpy < 2
+Write-Host "`n[5/6] Installing compatible NumPy..."
+pip install "numpy<2"
+
+# 7. Install torch separately (CPU version)
+Write-Host "`n[6/6] Installing PyTorch (CPU build)..."
+pip install torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+
+# Done
+Write-Host "`n✅ Setup complete. To activate your environment in future sessions:"
+Write-Host "   .\.venv\Scripts\Activate.ps1"
+
